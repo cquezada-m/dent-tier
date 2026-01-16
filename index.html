@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diseño de Sonrisa Digital Personalizada | Evaluación Exclusiva</title>
+  <meta name="description" content="Transforma tu sonrisa con planificación digital personalizada. Proceso clínico premium, resultados naturales. Postula a tu evaluación exclusiva.">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Diseño de Sonrisa Digital Personalizada">
+  <meta property="og:description" content="Proceso clínico premium con planificación digital. Resultados naturales y armónicos.">
+  <meta property="og:type" content="website">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Google+Sans+Flex:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  
+  <!-- Lenis Smooth Scroll -->
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.29/dist/lenis.min.js"></script>
+
+  <style>
+    :root {
+      --brand: #9077D1;
+      --brand-light: #B8A9E3;
+      --brand-lighter: #E8E3F5;
+      --brand-subtle: #F5F3FA;
+      --bg-primary: #FDFCFE;
+      --bg-secondary: #F9F7FC;
+      --text-primary: #1F1F23;
+      --text-secondary: #5A5A66;
+      --text-muted: #8E8E9A;
+      --border-light: #E8E3F5;
+      --white: #FFFFFF;
+    }
+
+    * {
+      font-family: 'Google Sans', 'Google Sans Flex', system-ui, -apple-system, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+    }
+
+    /* Gradient decorative elements */
+    .gradient-blur {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(144, 119, 209, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .gradient-line {
+      background: linear-gradient(90deg, transparent, var(--brand-light), transparent);
+      height: 1px;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-secondary);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--brand-light);
+      border-radius: 4px;
+    }
+
+    /* Form step transitions */
+    .form-step {
+      display: none;
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    .form-step.active {
+      display: block;
+      opacity: 1;
+      transform: translateX(0);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    /* Button hover effects */
+    .btn-primary {
+      background-color: var(--brand);
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background-color: #7B5FC4;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(144, 119, 209, 0.35);
+    }
+
+    .btn-secondary {
+      border: 1.5px solid var(--brand);
+      color: var(--brand);
+      transition: all 0.3s ease;
+    }
+    .btn-secondary:hover {
+      background-color: var(--brand-subtle);
+    }
+
+    /* Card hover */
+    .card-hover {
+      transition: all 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(144, 119, 209, 0.12);
+    }
+
+    /* Focus states */
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px rgba(144, 119, 209, 0.15);
+    }
+
+    /* Radio/Checkbox custom */
+    .custom-radio {
+      transition: all 0.2s ease;
+    }
+    .custom-radio:hover {
+      border-color: var(--brand);
+      background-color: var(--brand-subtle);
+    }
+    .custom-radio.selected {
+      border-color: var(--brand);
+      background-color: var(--brand-lighter);
+    }
+
+    /* Progress bar */
+    .progress-fill {
+      transition: width 0.4s ease;
+    }
+
+    /* Reveal animation class */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    /* Timeline connector */
+    .timeline-connector {
+      background: linear-gradient(to right, var(--brand-light), var(--brand), var(--brand-light));
+    }
+  </style>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              DEFAULT: '#9077D1',
+              light: '#B8A9E3',
+              lighter: '#E8E3F5',
+              subtle: '#F5F3FA'
+            },
+            surface: {
+              primary: '#FDFCFE',
+              secondary: '#F9F7FC'
+            },
+            content: {
+              primary: '#1F1F23',
+              secondary: '#5A5A66',
+              muted: '#8E8E9A'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="antialiased">
+
+  <!-- Decorative gradient blurs -->
+  <div class="gradient-blur fixed top-0 right-0 opacity-50"></div>
+  <div class="gradient-blur fixed bottom-1/4 left-0 opacity-30"></div>
+
+  <!-- ========== HEADER ========== -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-brand-lighter">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg bg-brand flex items-center justify-center">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <span class="font-semibold text-content-primary text-sm sm:text-base">Sonrisa Digital</span>
+      </div>
+      <a href="#formulario" class="btn-primary text-white text-sm font-medium px-4 py-2.5 rounded-full">
+        Postular
+      </a>
+    </div>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section id="hero" class="relative min-h-screen flex items-center pt-20 pb-16 overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 w-full">
+      <div class="max-w-2xl mx-auto text-center">
+        
+        <!-- Badge -->
+        <div class="reveal inline-flex items-center gap-2 bg-brand-subtle border border-brand-lighter rounded-full px-4 py-2 mb-6">
+          <span class="w-2 h-2 bg-brand rounded-full animate-pulse"></span>
+          <span class="text-sm font-medium text-brand">Evaluación exclusiva · Cupos limitados</span>
+        </div>
+
+        <!-- H1 -->
+        <h1 class="reveal text-3xl sm:text-4xl lg:text-5xl font-bold text-content-primary leading-tight mb-6">
+          Mejora tu sonrisa de forma 
+          <span class="text-brand">natural y planificada</span>
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="reveal text-lg sm:text-xl text-content-secondary leading-relaxed mb-8 max-w-xl mx-auto">
+          Diseño de Sonrisa Digital Personalizada. Proceso guiado, resultados armónicos, atención boutique.
+        </p>
+
+        <!-- CTA -->
+        <div class="reveal mb-8">
+          <a href="#formulario" class="btn-primary inline-flex items-center gap-2 text-white font-semibold px-8 py-4 rounded-full text-lg">
+            Postular a evaluación
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Trust badges -->
+        <div class="reveal flex flex-wrap justify-center gap-4 sm:gap-6 text-sm text-content-muted mb-10">
+          <span class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-brand" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            Planificación digital
+          </span>
+          <span class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-brand" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            Atención personalizada
+          </span>
+          <span class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-brand" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            Resultados naturales
+          </span>
+        </div>
+
+        <!-- Clinical filter text -->
+        <p class="reveal text-sm text-content-muted bg-surface-secondary border border-brand-lighter rounded-xl px-6 py-4 max-w-lg mx-auto">
+          ⚠️ Proceso clínico personalizado, sujeto a evaluación profesional. No corresponde a cotización masiva ni tratamiento económico.
+        </p>
+
+      </div>
+    </div>
+
+    <!-- Decorative bottom gradient -->
+    <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-surface-secondary to-transparent"></div>
+  </section>
+
+  <!-- ========== EMPATHY / PROBLEM ========== -->
+  <section id="problema" class="py-20 bg-surface-secondary">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="max-w-3xl mx-auto">
+        
+        <h2 class="reveal text-2xl sm:text-3xl font-bold text-content-primary text-center mb-4">
+          ¿Por qué no es una decisión simple?
+        </h2>
+        <p class="reveal text-content-secondary text-center mb-12 max-w-xl mx-auto">
+          Entendemos que mejorar tu sonrisa implica más que estética. Es confianza, seguridad y bienestar.
+        </p>
+
+        <div class="grid gap-4 sm:gap-6">
+          <div class="reveal card-hover bg-white rounded-2xl p-6 border border-brand-lighter flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-brand-subtle flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-content-primary mb-1">Inseguridad al sonreír</h3>
+              <p class="text-content-secondary text-sm">Evitas fotos o cubres tu boca al reír. Tu sonrisa debería ser motivo de confianza, no de preocupación.</p>
+            </div>
+          </div>
+
+          <div class="reveal card-hover bg-white rounded-2xl p-6 border border-brand-lighter flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-brand-subtle flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-content-primary mb-1">Miedo a resultados artificiales</h3>
+              <p class="text-content-secondary text-sm">Has visto sonrisas que no lucen naturales. Buscas armonía, no un cambio que se note forzado.</p>
+            </div>
+          </div>
+
+          <div class="reveal card-hover bg-white rounded-2xl p-6 border border-brand-lighter flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-brand-subtle flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-content-primary mb-1">Falta de confianza en cotizaciones previas</h3>
+              <p class="text-content-secondary text-sm">Presupuestos sin explicación clara, sin plan definido. Necesitas entender qué se hará y por qué.</p>
+            </div>
+          </div>
+
+          <div class="reveal card-hover bg-white rounded-2xl p-6 border border-brand-lighter flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-brand-subtle flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-content-primary mb-1">Deseo de solución planificada</h3>
+              <p class="text-content-secondary text-sm">No quieres improvisación. Buscas un proceso ordenado donde puedas ver el resultado antes de comenzar.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SOLUTION / METHOD ========== -->
+  <section id="solucion" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      
+      <div class="text-center mb-16">
+        <h2 class="reveal text-2xl sm:text-3xl font-bold text-content-primary mb-4">
+          La solución: Diseño de Sonrisa Digital Personalizada
+        </h2>
+        <p class="reveal text-content-secondary max-w-2xl mx-auto">
+          Un proceso guiado donde planificamos tu sonrisa antes de intervenir. Tecnología + experiencia clínica para resultados predecibles.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
+        
+        <div class="reveal card-hover bg-surface-secondary rounded-2xl p-8 border border-brand-lighter text-center">
+          <div class="w-14 h-14 rounded-2xl bg-brand-subtle flex items-center justify-center mx-auto mb-6">
+            <svg class="w-7 h-7 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-content-primary text-lg mb-3">Evaluación avanzada</h3>
+          <p class="text-content-secondary text-sm">Análisis facial, dental y estético completo. Entendemos tu caso antes de proponer soluciones.</p>
+        </div>
+
+        <div class="reveal card-hover bg-surface-secondary rounded-2xl p-8 border border-brand-lighter text-center">
+          <div class="w-14 h-14 rounded-2xl bg-brand-subtle flex items-center justify-center mx-auto mb-6">
+            <svg class="w-7 h-7 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-content-primary text-lg mb-3">Planificación digital</h3>
+          <p class="text-content-secondary text-sm">Diseñamos tu sonrisa digitalmente. Ves el resultado proyectado antes de cualquier procedimiento.</p>
+        </div>
+
+        <div class="reveal card-hover bg-surface-secondary rounded-2xl p-8 border border-brand-lighter text-center">
+          <div class="w-14 h-14 rounded-2xl bg-brand-subtle flex items-center justify-center mx-auto mb-6">
+            <svg class="w-7 h-7 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-content-primary text-lg mb-3">Ejecución personalizada</h3>
+          <p class="text-content-secondary text-sm">Propuesta clara y tratamiento adaptado a ti. Pocas sesiones, resultados naturales y duraderos.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== WHAT'S INCLUDED ========== -->
+  <section id="incluye" class="py-20 bg-surface-secondary">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      
+      <div class="text-center mb-16">
+        <h2 class="reveal text-2xl sm:text-3xl font-bold text-content-primary mb-4">
+          Qué incluye el proceso
+        </h2>
+        <p class="reveal text-content-secondary max-w-xl mx-auto">
+          Todo lo necesario para una experiencia premium y resultados que superan expectativas.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        
+        <div class="reveal card-hover bg-white rounded-xl p-5 border border-brand-lighter flex items-center gap-4">
+          <div class="w-10 h-10 rounded-lg bg-brand flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <span class="font-medium text-content-primary">Evaluación estética avanzada</span>
+        </div>
+
+        <div class="reveal card-hover bg-white rounded-xl p-5 border border-brand-lighter flex items-center gap-4">
+          <div class="w-10 h-10 rounded-lg bg-brand flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <span class="font-medium text-content-primary">Escaneo intraoral 3D</span>
+        </div>
+
+        <div class="reveal card-hover bg-white rounded-xl p-5 border border-brand-lighter flex items-center gap-4">
+          <div class="w-10 h-10 rounded-lg bg-brand flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <span class="font-medium text-content-primary">Diseño digital personalizado</span>
+        </div>
+
+        <div class="reveal card-hover bg-white rounded-xl p-5 border border-brand-lighter flex items-center gap-4">
+          <div class="w-10 h-10 rounded-lg bg-brand flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <span class="font-medium text-content-primary">Propuesta clara antes de iniciar</span>
+        </div>
+
+        <div class="reveal card-hover bg-white rounded-xl p-5 border border-brand-lighter flex items-center gap-4">
+          <div class="w-10 h-10 rounded-lg bg-brand flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <span class="font-medium text-content-primary">Atención directa con especialista</span>
+        </div>
+
+        <div class="reveal card-hover bg-white rounded-xl p-5 border border-brand-lighter flex items-center gap-4">
+          <div class="w-10 h-10 rounded-lg bg-brand flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <span class="font-medium text-content-primary">Ejecución en pocas sesiones</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOR WHOM YES / NO ========== -->
+  <section id="para-quien" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      
+      <div class="text-center mb-16">
+        <h2 class="reveal text-2xl sm:text-3xl font-bold text-content-primary mb-4">
+          ¿Es para ti?
+        </h2>
+        <p class="reveal text-content-secondary max-w-xl mx-auto">
+          Este proceso está diseñado para personas con expectativas claras y compromiso real.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-4xl mx-auto">
+        
+        <!-- YES column -->
+        <div class="reveal card-hover bg-brand-subtle rounded-2xl p-8 border border-brand-lighter">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 rounded-full bg-brand flex items-center justify-center">
+              <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-content-primary text-lg">Sí es para ti si...</h3>
+          </div>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-brand flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-content-secondary">Buscas un resultado natural y armónico</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-brand flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-content-secondary">Valoras la planificación y tecnología</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-brand flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-content-secondary">Estás dispuesto(a) a invertir en ti</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-brand flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-content-secondary">Quieres confianza y previsibilidad</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- NO column -->
+        <div class="reveal card-hover bg-surface-secondary rounded-2xl p-8 border border-brand-lighter">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 rounded-full bg-content-muted flex items-center justify-center">
+              <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-content-primary text-lg">No es para ti si...</h3>
+          </div>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-content-muted flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-content-secondary">Buscas la opción más económica</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-content-muted flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-content-secondary">Solo quieres cotizar por curiosidad</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-content-muted flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-content-secondary">No estás listo(a) para decidir pronto</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-content-muted flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-content-secondary">Comparas solo por precio</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== INVESTMENT / TRANSPARENCY ========== -->
+  <section id="inversion" class="py-20 bg-surface-secondary">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="max-w-3xl mx-auto text-center">
+        
+        <div class="reveal inline-flex items-center gap-2 bg-white border border-brand-lighter rounded-full px-4 py-2 mb-6">
+          <svg class="w-4 h-4 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <span class="text-sm font-medium text-content-secondary">Transparencia</span>
+        </div>
+
+        <h2 class="reveal text-2xl sm:text-3xl font-bold text-content-primary mb-6">
+          Sobre la inversión
+        </h2>
+
+        <p class="reveal text-content-secondary text-lg leading-relaxed mb-8">
+          Este es un tratamiento de <strong class="text-content-primary">inversión media-alta</strong>, acorde a la planificación digital, tecnología utilizada y atención personalizada que recibirás.
+        </p>
+
+        <div class="reveal bg-white rounded-2xl p-8 border border-brand-lighter">
+          <div class="grid sm:grid-cols-2 gap-6 text-left">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl bg-brand-subtle flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-content-primary mb-1">Inversión personalizada</h4>
+                <p class="text-content-secondary text-sm">Se define según tu caso específico en la evaluación clínica.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl bg-brand-subtle flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-content-primary mb-1">Facilidades disponibles</h4>
+                <p class="text-content-secondary text-sm">Opciones de pago flexibles que se conversan en la consulta.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="reveal text-sm text-content-muted mt-6">
+          No publicamos precios fijos porque cada sonrisa es única. La inversión se presenta de forma clara y sin sorpresas después de la evaluación.
+        </p>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PROCESS TIMELINE ========== -->
+  <section id="proceso" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      
+      <div class="text-center mb-16">
+        <h2 class="reveal text-2xl sm:text-3xl font-bold text-content-primary mb-4">
+          ¿Cómo funciona?
+        </h2>
+        <p class="reveal text-content-secondary max-w-xl mx-auto">
+          Un proceso claro y ordenado, sin improvisaciones.
+        </p>
+      </div>
+
+      <!-- Mobile: Vertical timeline -->
+      <div class="md:hidden space-y-6">
+        <div class="reveal flex gap-4">
+          <div class="flex flex-col items-center">
+            <div class="w-10 h-10 rounded-full bg-brand flex items-center justify-center text-white font-semibold">1</div>
+            <div class="w-0.5 h-full bg-brand-lighter mt-2"></div>
+          </div>
+          <div class="pb-6">
+            <h4 class="font-semibold text-content-primary mb-1">Postulas</h4>
+            <p class="text-content-secondary text-sm">Completas el formulario de precalificación.</p>
+          </div>
+        </div>
+        <div class="reveal flex gap-4">
+          <div class="flex flex-col items-center">
+            <div class="w-10 h-10 rounded-full bg-brand flex items-center justify-center text-white font-semibold">2</div>
+            <div class="w-0.5 h-full bg-brand-lighter mt-2"></div>
+          </div>
+          <div class="pb-6">
+            <h4 class="font-semibold text-content-primary mb-1">Confirmamos</h4>
+            <p class="text-content-secondary text-sm">Evaluamos si eres candidato(a) para el proceso.</p>
+          </div>
+        </div>
+        <div class="reveal flex gap-4">
+          <div class="flex flex-col items-center">
+            <div class="w-10 h-10 rounded-full bg-brand flex items-center justify-center text-white font-semibold">3</div>
+            <div class="w-0.5 h-full bg-brand-lighter mt-2"></div>
+          </div>
+          <div class="pb-6">
+            <h4 class="font-semibold text-content-primary mb-1">Coordinas</h4>
+            <p class="text-content-secondary text-sm">Agendas tu evaluación por WhatsApp.</p>
+          </div>
+        </div>
+        <div class="reveal flex gap-4">
+          <div class="flex flex-col items-center">
+            <div class="w-10 h-10 rounded-full bg-brand flex items-center justify-center text-white font-semibold">4</div>
+            <div class="w-0.5 h-full bg-brand-lighter mt-2"></div>
+          </div>
+          <div class="pb-6">
+            <h4 class="font-semibold text-content-primary mb-1">Evaluación</h4>
+            <p class="text-content-secondary text-sm">Visita en clínica con análisis completo.</p>
+          </div>
+        </div>
+        <div class="reveal flex gap-4">
+          <div class="flex flex-col items-center">
+            <div class="w-10 h-10 rounded-full bg-brand flex items-center justify-center text-white font-semibold">5</div>
+          </div>
+          <div>
+            <h4 class="font-semibold text-content-primary mb-1">Plan personalizado</h4>
+            <p class="text-content-secondary text-sm">Recibes tu propuesta y comenzamos.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Desktop: Horizontal timeline -->
+      <div class="hidden md:block">
+        <div class="relative">
+          <div class="absolute top-5 left-0 right-0 h-0.5 timeline-connector"></div>
+          <div class="grid grid-cols-5 gap-4">
+            <div class="reveal text-center relative">
+              <div class="w-10 h-10 rounded-full bg-brand flex items-center justify-center text-white font-semibold mx-auto mb-4 relative z-10">1</div>
+              <h4 class="font-semibold text-content-primary mb-1">Postulas</h4>
+              <p class="text-content-secondary text-sm">Completas el formulario</p>
+            </div>
+            <div class="reveal text-center relative">
+              <div class="w-10 h-10 rounded-full bg-brand flex items-center justify-center text-white font-semibold mx-auto mb-4 relative z-10">2</div>
+              <h4 class="font-semibold text-content-primary mb-1">Confirmamos</h4>
+              <p class="text-content-secondary text-sm">Evaluamos tu caso</p>
+            </div>
+            <div class="reveal text-center relative">
+              <div class="w-10 h-10 rounded-full bg-brand flex items-center justify-center text-white font-semibold mx-auto mb-4 relative z-10">3</div>
+              <h4 class="font-semibold text-content-primary mb-1">Coordinas</h4>
+              <p class="text-content-secondary text-sm">Agendas por WhatsApp</p>
+            </div>
+            <div class="reveal text-center relative">
+              <div class="w-10 h-10 rounded-full bg-brand flex items-center justify-center text-white font-semibold mx-auto mb-4 relative z-10">4</div>
+              <h4 class="font-semibold text-content-primary mb-1">Evaluación</h4>
+              <p class="text-content-secondary text-sm">Visita en clínica</p>
+            </div>
+            <div class="reveal text-center relative">
+              <div class="w-10 h-10 rounded-full bg-brand flex items-center justify-center text-white font-semibold mx-auto mb-4 relative z-10">5</div>
+              <h4 class="font-semibold text-content-primary mb-1">Plan</h4>
+              <p class="text-content-secondary text-sm">Propuesta y ejecución</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========== MULTI-STEP FORM ========== -->
+  <section id="formulario" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="max-w-xl mx-auto">
+        
+        <div class="text-center mb-10">
+          <h2 class="reveal text-2xl sm:text-3xl font-bold text-content-primary mb-4">
+            Postula a tu evaluación
+          </h2>
+          <p class="reveal text-content-secondary">
+            Completa el formulario para verificar si eres candidato(a) al proceso.
+          </p>
+        </div>
+
+        <!-- Form Container -->
+        <div id="form-container" class="reveal bg-surface-secondary rounded-2xl p-6 sm:p-8 border border-brand-lighter">
+          
+          <!-- Progress Bar -->
+          <div class="mb-8">
+            <div class="flex justify-between text-sm text-content-muted mb-2">
+              <span>Paso <span id="current-step">1</span> de 6</span>
+              <span id="progress-percent">17%</span>
+            </div>
+            <div class="h-2 bg-brand-lighter rounded-full overflow-hidden">
+              <div id="progress-bar" class="h-full bg-brand progress-fill rounded-full" style="width: 17%"></div>
+            </div>
+          </div>
+
+          <form id="qualification-form" novalidate>
+            
+            <!-- Step 1: Name -->
+            <div class="form-step active" data-step="1">
+              <label for="first_name" class="block text-content-primary font-medium mb-2">¿Cuál es tu nombre?</label>
+              <input 
+                type="text" 
+                id="first_name" 
+                name="first_name" 
+                placeholder="Tu nombre"
+                required
+                class="w-full px-4 py-3 rounded-xl border border-brand-lighter bg-white text-content-primary placeholder-content-muted focus:border-brand focus:ring-2 focus:ring-brand/20 transition-all"
+              >
+              <p class="text-sm text-content-muted mt-2">Así podremos personalizar tu experiencia.</p>
+            </div>
+
+            <!-- Step 2: Goal -->
+            <div class="form-step" data-step="2">
+              <label class="block text-content-primary font-medium mb-4">¿Cuál es tu objetivo principal?</label>
+              <div class="space-y-3">
+                <label class="custom-radio block p-4 rounded-xl border border-brand-lighter bg-white cursor-pointer">
+                  <input type="radio" name="primary_goal" value="armonica" class="sr-only">
+                  <span class="text-content-primary">Sonrisa más armónica y natural</span>
+                </label>
+                <label class="custom-radio block p-4 rounded-xl border border-brand-lighter bg-white cursor-pointer">
+                  <input type="radio" name="primary_goal" value="confianza" class="sr-only">
+                  <span class="text-content-primary">Mejorar confianza al sonreír</span>
+                </label>
+                <label class="custom-radio block p-4 rounded-xl border border-brand-lighter bg-white cursor-pointer">
+                  <input type="radio" name="primary_goal" value="corregir" class="sr-only">
+                  <span class="text-content-primary">Corregir detalles estéticos</span>
+                </label>
+                <label class="custom-radio block p-4 rounded-xl border border-brand-lighter bg-white cursor-pointer">
+                  <input type="radio" name="primary_goal" value="no_seguro" class="sr-only">
+                  <span class="text-content-primary">No estoy seguro(a)</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Step 3: Timeline -->
+            <div class="form-step" data-step="3">
+              <label class="block text-content-primary font-medium mb-4">¿En qué plazo te gustaría comenzar?</label>
+              <div class="space-y-3">
+                <label class="custom-radio block p-4 rounded-xl border border-brand-lighter bg-white cursor-pointer">
+                  <input type="radio" name="timeline" value="7-14" class="sr-only">
+                  <span class="text-content-primary">En los próximos 7–14 días</span>
+                </label>
+                <label class="custom-radio block p-4 rounded-xl border border-brand-lighter bg-white cursor-pointer">
+                  <input type="radio" name="timeline" value="este_mes" class="sr-only">
+                  <span class="text-content-primary">Este mes</span>
+                </label>
+                <label class="custom-radio block p-4 rounded-xl border border-brand-lighter bg-white cursor-pointer">
+                  <input type="radio" name="timeline" value="60_dias" class="sr-only">
+                  <span class="text-content-primary">En más de 60 días</span>
+                </label>
+                <label class="custom-radio block p-4 rounded-xl border border-brand-lighter bg-white cursor-pointer">
+                  <input type="radio" name="timeline" value="no_seguro" class="sr-only">
+                  <span class="text-content-primary">No estoy seguro(a)</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Step 4: Priority -->
+            <div class="form-step" data-step="4">
+              <label class="block text-content-primary font-medium mb-4">¿Cuál es tu nivel de prioridad?</label>
+              <div class="space-y-3">
+                <label class="custom-radio block p-4 rounded-xl border border-brand-lighter bg-white cursor-pointer">
+                  <input type="radio" name="priority" value="alta" class="sr-only">
+                  <span class="text-content-primary font-medium">Alta</span>
+                  <span class="block text-content-muted text-sm mt-1">Quiero resolverlo pronto</span>
+                </label>
+                <label class="custom-radio block p-4 rounded-xl border border-brand-lighter bg-white cursor-pointer">
+                  <input type="radio" name="priority" value="media" class="sr-only">
+                  <span class="text-content-primary font-medium">Media</span>
+                  <span class="block text-content-muted text-sm mt-1">Quiero evaluar opciones</span>
+                </label>
+                <label class="custom-radio block p-4 rounded-xl border border-brand-lighter bg-white cursor-pointer">
+                  <input type="radio" name="priority" value="explorando" class="sr-only">
+                  <span class="text-content-primary font-medium">Explorando</span>
+                  <span class="block text-content-muted text-sm mt-1">Solo estoy mirando</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Step 5: Investment Range -->
+            <div class="form-step" data-step="5">
+              <label class="block text-content-primary font-medium mb-2">¿Cuál es tu rango de inversión esperado?</label>
+              <p class="text-sm text-content-muted mb-4">Esto nos ayuda a orientarte mejor. La inversión final se define en evaluación.</p>
+              <div class="space-y-3">
+                <label class="custom-radio block p-4 rounded-xl border border-brand-lighter bg-white cursor-pointer">
+                  <input type="radio" name="investment_range" value="1500-3000" class="sr-only">
+                  <span class="text-content-primary">$1.500 – $3.000 USD</span>
+                </label>
+                <label class="custom-radio block p-4 rounded-xl border border-brand-lighter bg-white cursor-pointer">
+                  <input type="radio" name="investment_range" value="3000-6000" class="sr-only">
+                  <span class="text-content-primary">$3.000 – $6.000 USD</span>
+                </label>
+                <label class="custom-radio block p-4 rounded-xl border border-brand-lighter bg-white cursor-pointer">
+                  <input type="radio" name="investment_range" value="6000+" class="sr-only">
+                  <span class="text-content-primary">$6.000+ USD</span>
+                </label>
+                <label class="custom-radio block p-4 rounded-xl border border-brand-lighter bg-white cursor-pointer">
+                  <input type="radio" name="investment_range" value="no_declara" class="sr-only">
+                  <span class="text-content-primary">Prefiero no decir</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Step 6: Consent -->
+            <div class="form-step" data-step="6">
+              <label class="block text-content-primary font-medium mb-4">Último paso: confirmación</label>
+              <div class="space-y-4">
+                <label class="custom-radio flex items-start gap-3 p-4 rounded-xl border border-brand-lighter bg-white cursor-pointer">
+                  <input type="checkbox" name="accepted_conditions" value="true" class="mt-1 w-5 h-5 rounded border-brand-lighter text-brand focus:ring-brand">
+                  <span class="text-content-secondary text-sm">Entiendo que esta es una evaluación para un tratamiento premium y no corresponde a una cotización masiva.</span>
+                </label>
+                <label class="custom-radio flex items-start gap-3 p-4 rounded-xl border border-brand-lighter bg-white cursor-pointer">
+                  <input type="checkbox" name="whatsapp_opt_in" value="true" class="mt-1 w-5 h-5 rounded border-brand-lighter text-brand focus:ring-brand">
+                  <span class="text-content-secondary text-sm">Acepto que me contacten por WhatsApp para coordinar mi evaluación.</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="flex gap-3 mt-8">
+              <button 
+                type="button" 
+                id="btn-prev" 
+                class="btn-secondary flex-1 py-3 px-6 rounded-xl font-medium hidden"
+              >
+                Volver
+              </button>
+              <button 
+                type="button" 
+                id="btn-next" 
+                class="btn-primary flex-1 py-3 px-6 rounded-xl font-medium text-white"
+              >
+                Continuar
+              </button>
+              <button 
+                type="submit" 
+                id="btn-submit" 
+                class="btn-primary flex-1 py-3 px-6 rounded-xl font-medium text-white hidden"
+              >
+                Enviar postulación
+              </button>
+            </div>
+
+          </form>
+        </div>
+
+        <!-- Result Container (hidden by default) -->
+        <div id="result-container" class="hidden">
+          
+          <!-- Qualified Result (A/B) -->
+          <div id="result-qualified" class="hidden bg-brand-subtle rounded-2xl p-8 border border-brand-lighter text-center">
+            <div class="w-16 h-16 rounded-full bg-brand flex items-center justify-center mx-auto mb-6">
+              <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-content-primary mb-2">¡Gracias, <span id="result-name"></span>!</h3>
+            <p class="text-content-secondary mb-6">Eres candidato(a) para la evaluación. Continúa por WhatsApp para coordinar tu cita.</p>
+            <a 
+              id="whatsapp-link" 
+              href="#" 
+              target="_blank"
+              class="btn-primary inline-flex items-center gap-2 text-white font-semibold px-8 py-4 rounded-full"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Ir a WhatsApp
+            </a>
+          </div>
+
+          <!-- Not Qualified Result (C) -->
+          <div id="result-not-qualified" class="hidden bg-surface-secondary rounded-2xl p-8 border border-brand-lighter text-center">
+            <div class="w-16 h-16 rounded-full bg-content-muted flex items-center justify-center mx-auto mb-6">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-content-primary mb-2">Gracias por tu interés</h3>
+            <p class="text-content-secondary mb-4">Este proceso está diseñado para casos de inversión media-alta con intención definida.</p>
+            <p class="text-content-muted text-sm">Si buscas opciones generales o tienes dudas, te invitamos a consultar directamente en la clínica.</p>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="py-12 bg-surface-secondary border-t border-brand-lighter">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center">
+        
+        <div class="flex items-center justify-center gap-2 mb-4">
+          <div class="w-8 h-8 rounded-lg bg-brand flex items-center justify-center">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <span class="font-semibold text-content-primary">Sonrisa Digital</span>
+        </div>
+
+        <p class="text-content-secondary text-sm mb-2">Santiago, Chile</p>
+        <p class="text-content-muted text-sm mb-6">Lunes a Viernes: 9:00 – 18:00</p>
+
+        <div class="gradient-line w-32 mx-auto mb-6"></div>
+
+        <p class="text-content-muted text-xs max-w-md mx-auto">
+          Los resultados pueden variar según el diagnóstico clínico individual. Este sitio no constituye una oferta de servicios médicos. Tratamiento sujeto a evaluación profesional.
+        </p>
+
+        <p class="text-content-muted text-xs mt-4">© 2024 Clínica Dental. Todos los derechos reservados.</p>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== JAVASCRIPT ========== -->
+  <script>
+  (function() {
+    'use strict';
+
+    // ==================== UTILITIES ====================
+    
+    // Generate UUID v4
+    function generateUUID() {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        const r = Math.random() * 16 | 0;
+        const v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+      });
+    }
+
+    // Generate short ID for WhatsApp message
+    function generateShortId() {
+      return 'CT-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+    }
+
+    // Parse UTM parameters from URL
+    function getUTMParams() {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        utm_source: params.get('utm_source') || '',
+        utm_medium: params.get('utm_medium') || '',
+        utm_campaign: params.get('utm_campaign') || '',
+        utm_content: params.get('utm_content') || '',
+        utm_term: params.get('utm_term') || ''
+      };
+    }
+
+    // ==================== TRACKING ====================
+    
+    window.dataLayer = window.dataLayer || [];
+
+    const sessionId = sessionStorage.getItem('session_id') || generateUUID();
+    sessionStorage.setItem('session_id', sessionId);
+
+    let leadId = localStorage.getItem('lead_id') || generateUUID();
+    localStorage.setItem('lead_id', leadId);
+
+    const utmParams = getUTMParams();
+    const qualificationVersion = '1.0';
+
+    function pushEvent(eventName, additionalData = {}) {
+      const eventData = {
+        event: eventName,
+        session_id: sessionId,
+        lead_id: leadId,
+        qualification_version: qualificationVersion,
+        ...utmParams,
+        ...additionalData
+      };
+      window.dataLayer.push(eventData);
+      console.log('[DataLayer]', eventName, eventData);
+    }
+
+    // Page view event
+    pushEvent('page_view');
+
+    // View content event (50% scroll or 15s)
+    let viewContentFired = false;
+    function fireViewContent(engagementType) {
+      if (viewContentFired) return;
+      viewContentFired = true;
+      pushEvent('view_content', { engagement_type: engagementType });
+    }
+
+    // Scroll tracking
+    window.addEventListener('scroll', function() {
+      const scrollPercent = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight;
+      if (scrollPercent >= 0.5) {
+        fireViewContent('scroll_50');
+      }
+    });
+
+    // Time tracking
+    setTimeout(function() {
+      fireViewContent('time_15s');
+    }, 15000);
+
+    // ==================== LENIS SMOOTH SCROLL ====================
+    
+    if (typeof Lenis !== 'undefined') {
+      const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smooth: true
+      });
+
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+    }
+
+    // ==================== GSAP ANIMATIONS ====================
+    
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Reveal animations
+    gsap.utils.toArray('.reveal').forEach((el, i) => {
+      gsap.fromTo(el, 
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 85%',
+            toggleActions: 'play none none none'
+          },
+          delay: i % 3 * 0.1
+        }
+      );
+    });
+
+    // ==================== FORM LOGIC ====================
+    
+    const form = document.getElementById('qualification-form');
+    const formContainer = document.getElementById('form-container');
+    const resultContainer = document.getElementById('result-container');
+    const resultQualified = document.getElementById('result-qualified');
+    const resultNotQualified = document.getElementById('result-not-qualified');
+    const resultName = document.getElementById('result-name');
+    const whatsappLink = document.getElementById('whatsapp-link');
+
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+    const btnSubmit = document.getElementById('btn-submit');
+
+    const currentStepEl = document.getElementById('current-step');
+    const progressBar = document.getElementById('progress-bar');
+    const progressPercent = document.getElementById('progress-percent');
+
+    const steps = document.querySelectorAll('.form-step');
+    const totalSteps = steps.length;
+    let currentStep = 1;
+
+    // Form data storage
+    let formData = JSON.parse(localStorage.getItem('form_data')) || {};
+    let formStarted = localStorage.getItem('form_started') === 'true';
+
+    // WhatsApp number (replace with actual clinic number)
+    const WHATSAPP_NUMBER = '56912345678';
+
+    // Restore form data
+    function restoreFormData() {
+      if (formData.first_name) {
+        document.getElementById('first_name').value = formData.first_name;
+      }
+      
+      ['primary_goal', 'timeline', 'priority', 'investment_range'].forEach(field => {
+        if (formData[field]) {
+          const radio = document.querySelector(`input[name="${field}"][value="${formData[field]}"]`);
+          if (radio) {
+            radio.checked = true;
+            radio.closest('.custom-radio').classList.add('selected');
+          }
+        }
+      });
+
+      ['accepted_conditions', 'whatsapp_opt_in'].forEach(field => {
+        if (formData[field]) {
+          const checkbox = document.querySelector(`input[name="${field}"]`);
+          if (checkbox) {
+            checkbox.checked = true;
+            checkbox.closest('.custom-radio').classList.add('selected');
+          }
+        }
+      });
+
+      // Restore step
+      const savedStep = parseInt(localStorage.getItem('current_step')) || 1;
+      if (savedStep > 1 && savedStep <= totalSteps) {
+        goToStep(savedStep);
+      }
+    }
+
+    // Save form data
+    function saveFormData() {
+      formData.first_name = document.getElementById('first_name').value;
+      
+      ['primary_goal', 'timeline', 'priority', 'investment_range'].forEach(field => {
+        const checked = document.querySelector(`input[name="${field}"]:checked`);
+        if (checked) formData[field] = checked.value;
+      });
+
+      ['accepted_conditions', 'whatsapp_opt_in'].forEach(field => {
+        const checkbox = document.querySelector(`input[name="${field}"]`);
+        if (checkbox) formData[field] = checkbox.checked;
+      });
+
+      localStorage.setItem('form_data', JSON.stringify(formData));
+      localStorage.setItem('current_step', currentStep.toString());
+    }
+
+    // Update progress UI
+    function updateProgress() {
+      const percent = Math.round((currentStep / totalSteps) * 100);
+      currentStepEl.textContent = currentStep;
+      progressBar.style.width = percent + '%';
+      progressPercent.textContent = percent + '%';
+    }
+
+    // Show/hide navigation buttons
+    function updateButtons() {
+      btnPrev.classList.toggle('hidden', currentStep === 1);
+      btnNext.classList.toggle('hidden', currentStep === totalSteps);
+      btnSubmit.classList.toggle('hidden', currentStep !== totalSteps);
+    }
+
+    // Go to specific step
+    function goToStep(step) {
+      steps.forEach(s => s.classList.remove('active'));
+      const targetStep = document.querySelector(`.form-step[data-step="${step}"]`);
+      if (targetStep) {
+        targetStep.classList.add('active');
+        currentStep = step;
+        updateProgress();
+        updateButtons();
+        saveFormData();
+
+        // Fire form_step event
+        pushEvent('form_step', { 
+          step: currentStep, 
+          field_group: targetStep.querySelector('label')?.textContent?.substring(0, 30) || ''
+        });
+      }
+    }
+
+    // Validate current step
+    function validateStep() {
+      const activeStep = document.querySelector('.form-step.active');
+      const step = parseInt(activeStep.dataset.step);
+
+      if (step === 1) {
+        const name = document.getElementById('first_name').value.trim();
+        if (!name) {
+          document.getElementById('first_name').focus();
+          return false;
+        }
+      }
+
+      if (step >= 2 && step <= 5) {
+        const fieldNames = ['', '', 'primary_goal', 'timeline', 'priority', 'investment_range'];
+        const fieldName = fieldNames[step];
+        const checked = document.querySelector(`input[name="${fieldName}"]:checked`);
+        if (!checked) return false;
+      }
+
+      return true;
+    }
+
+    // Calculate lead tier
+    function calculateTier() {
+      const priority = formData.priority;
+      const timeline = formData.timeline;
+      const investment = formData.investment_range;
+      const accepted = formData.accepted_conditions;
+
+      if (!accepted) return 'C';
+
+      // Tier A: High priority + short timeline + high investment
+      if (priority === 'alta' && 
+          (timeline === '7-14' || timeline === 'este_mes') && 
+          (investment === '3000-6000' || investment === '6000+')) {
+        return 'A';
+      }
+
+      // Tier B: Medium priority + defined timeline + medium+ investment
+      if ((priority === 'alta' || priority === 'media') && 
+          timeline !== 'no_seguro' && 
+          (investment === '1500-3000' || investment === '3000-6000' || investment === '6000+')) {
+        return 'B';
+      }
+
+      return 'C';
+    }
+
+    // Handle form submission
+    function handleSubmit() {
+      saveFormData();
+
+      const tier = calculateTier();
+      const isQualified = tier === 'A' || tier === 'B';
+      const shortId = generateShortId();
+
+      // Fire form_submit event
+      pushEvent('form_submit', {
+        lead_tier: tier,
+        is_qualified: isQualified,
+        investment_range: formData.investment_range,
+        priority: formData.priority,
+        timeline: formData.timeline
+      });
+
+      // Fire qualified_lead event only for A/B
+      if (isQualified) {
+        pushEvent('qualified_lead', {
+          lead_tier: tier,
+          is_qualified: true,
+          investment_range: formData.investment_range,
+          priority: formData.priority,
+          timeline: formData.timeline
+        });
+      }
+
+      // Show result
+      formContainer.classList.add('hidden');
+      resultContainer.classList.remove('hidden');
+
+      if (isQualified) {
+        resultQualified.classList.remove('hidden');
+        resultName.textContent = formData.first_name;
+
+        // Build WhatsApp message
+        const message = encodeURIComponent(
+          `Hola, soy ${formData.first_name}. Postulé a la evaluación de Diseño de Sonrisa Digital Personalizada. ¿Me ayudan a agendar? ID: ${shortId}`
+        );
+        whatsappLink.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+
+        // Track WhatsApp click
+        whatsappLink.addEventListener('click', function() {
+          pushEvent('whatsapp_redirect', {
+            lead_tier: tier,
+            is_qualified: true
+          });
+        });
+      } else {
+        resultNotQualified.classList.remove('hidden');
+      }
+
+      // Clear stored form data
+      localStorage.removeItem('form_data');
+      localStorage.removeItem('current_step');
+      localStorage.removeItem('form_started');
+    }
+
+    // Event listeners for radio buttons
+    document.querySelectorAll('.custom-radio').forEach(label => {
+      label.addEventListener('click', function() {
+        const input = this.querySelector('input');
+        if (input.type === 'radio') {
+          this.closest('.space-y-3, .space-y-4').querySelectorAll('.custom-radio').forEach(l => {
+            l.classList.remove('selected');
+          });
+          this.classList.add('selected');
+        } else if (input.type === 'checkbox') {
+          this.classList.toggle('selected', input.checked);
+        }
+      });
+    });
+
+    // Navigation buttons
+    btnNext.addEventListener('click', function() {
+      if (!validateStep()) return;
+
+      // Fire form_start on first interaction
+      if (!formStarted) {
+        formStarted = true;
+        localStorage.setItem('form_started', 'true');
+        pushEvent('form_start');
+      }
+
+      if (currentStep < totalSteps) {
+        goToStep(currentStep + 1);
+      }
+    });
+
+    btnPrev.addEventListener('click', function() {
+      if (currentStep > 1) {
+        goToStep(currentStep - 1);
+      }
+    });
+
+    btnSubmit.addEventListener('click', function(e) {
+      e.preventDefault();
+      if (!validateStep()) return;
+      handleSubmit();
+    });
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+    });
+
+    // Initialize
+    restoreFormData();
+    updateProgress();
+    updateButtons();
+
+  })();
+  </script>
+
+</body>
+</html>
