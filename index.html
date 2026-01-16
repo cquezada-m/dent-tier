@@ -27,18 +27,65 @@
   <script src="https://unpkg.com/@studio-freight/lenis@1.0.29/dist/lenis.min.js"></script>
 
   <style>
+    /* ==================== DESIGN SYSTEM: GOOGLE LABS STYLE ==================== */
+    
     :root {
-      --brand: #9077D1;
-      --brand-light: #B8A9E3;
-      --brand-lighter: #E8E3F5;
-      --brand-subtle: #F5F3FA;
-      --bg-primary: #FDFCFE;
-      --bg-secondary: #F9F7FC;
-      --text-primary: #1F1F23;
-      --text-secondary: #5A5A66;
-      --text-muted: #8E8E9A;
-      --border-light: #E8E3F5;
-      --white: #FFFFFF;
+      /* Neutrals - clean, editorial */
+      --neutral-50: #FAFAFA;
+      --neutral-100: #F5F5F5;
+      --neutral-200: #E5E5E5;
+      --neutral-300: #D4D4D4;
+      --neutral-400: #A3A3A3;
+      --neutral-500: #737373;
+      --neutral-600: #525252;
+      --neutral-700: #404040;
+      --neutral-800: #262626;
+      --neutral-900: #171717;
+      
+      /* Accent - vibrant, measured */
+      --accent: #9077D1;
+      --accent-hover: #7B5FC4;
+      --accent-light: #B8A9E3;
+      --accent-subtle: #F3F0FA;
+      
+      /* Semantic */
+      --success: #22C55E;
+      --warning: #F59E0B;
+      --error: #EF4444;
+      
+      /* Surfaces */
+      --surface-primary: #FFFFFF;
+      --surface-secondary: #FAFAFA;
+      --surface-elevated: #FFFFFF;
+      
+      /* Typography */
+      --text-primary: #171717;
+      --text-secondary: #525252;
+      --text-muted: #737373;
+      --text-inverse: #FFFFFF;
+      
+      /* Borders */
+      --border-default: #E5E5E5;
+      --border-subtle: #F5F5F5;
+      
+      /* Shadows */
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+      --shadow-lg: 0 8px 24px rgba(0,0,0,0.08);
+      --shadow-xl: 0 16px 48px rgba(0,0,0,0.10);
+      
+      /* Radii */
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --radius-full: 9999px;
+      
+      /* Transitions */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --duration-fast: 180ms;
+      --duration-normal: 240ms;
+      --duration-slow: 400ms;
     }
 
     * {
@@ -50,114 +97,359 @@
     }
 
     body {
-      background-color: var(--bg-primary);
+      background-color: var(--surface-primary);
       color: var(--text-primary);
+      line-height: 1.6;
     }
 
-    /* Gradient decorative elements */
-    .gradient-blur {
+    /* ==================== GRAIN TEXTURE ==================== */
+    
+    .grain {
+      position: relative;
+    }
+    .grain::before {
+      content: '';
       position: absolute;
-      width: 400px;
-      height: 400px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(144, 119, 209, 0.15) 0%, transparent 70%);
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      opacity: 0.025;
       pointer-events: none;
-      z-index: 0;
+      z-index: 1;
     }
 
-    .gradient-line {
-      background: linear-gradient(90deg, transparent, var(--brand-light), transparent);
-      height: 1px;
+    .dots-pattern {
+      background-image: radial-gradient(circle, var(--neutral-300) 1px, transparent 1px);
+      background-size: 24px 24px;
     }
 
-    /* Custom scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: var(--bg-secondary);
-    }
-    ::-webkit-scrollbar-thumb {
-      background: var(--brand-light);
-      border-radius: 4px;
+    /* ==================== TYPOGRAPHY ==================== */
+    
+    .text-display {
+      font-size: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
     }
 
-    /* Form step transitions */
+    .text-headline {
+      font-size: clamp(1.75rem, 3vw + 0.5rem, 2.5rem);
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+
+    .text-title {
+      font-size: 1.25rem;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    .text-body {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .text-caption {
+      font-size: 0.875rem;
+      line-height: 1.5;
+    }
+
+    .text-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+    }
+
+    /* ==================== NAV STICKY ==================== */
+    
+    .nav-sticky {
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.85);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    /* ==================== BADGES / LABELS ==================== */
+    
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      font-size: 0.6875rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius-full);
+      transition: all var(--duration-fast) var(--ease-out);
+    }
+
+    .badge-featured {
+      background: var(--accent);
+      color: var(--text-inverse);
+    }
+
+    .badge-new {
+      background: var(--success);
+      color: var(--text-inverse);
+    }
+
+    .badge-experiment {
+      background: var(--neutral-800);
+      color: var(--text-inverse);
+    }
+
+    .badge-outline {
+      background: transparent;
+      border: 1px solid var(--border-default);
+      color: var(--text-secondary);
+    }
+
+    /* ==================== BUTTONS PILL ==================== */
+    
+    .btn-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      border-radius: var(--radius-full);
+      transition: all var(--duration-normal) var(--ease-out);
+      cursor: pointer;
+      border: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-pill:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--text-inverse);
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--border-default);
+    }
+    .btn-secondary:hover {
+      background: var(--neutral-100);
+      border-color: var(--neutral-300);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--accent);
+    }
+    .btn-ghost:hover {
+      background: var(--accent-subtle);
+    }
+
+    .btn-sm {
+      padding: 8px 16px;
+      font-size: 0.8125rem;
+    }
+
+    .btn-lg {
+      padding: 16px 32px;
+      font-size: 1rem;
+    }
+
+    /* ==================== CARDS ==================== */
+    
+    .card {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-lg);
+      transition: all var(--duration-normal) var(--ease-out);
+      overflow: hidden;
+    }
+
+    .card:hover {
+      border-color: var(--neutral-300);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .card-sm {
+      padding: 16px;
+      border-radius: var(--radius-md);
+    }
+
+    .card-md {
+      padding: 24px;
+    }
+
+    .card-lg {
+      padding: 32px;
+      border-radius: var(--radius-xl);
+    }
+
+    .card-media {
+      position: relative;
+      overflow: hidden;
+    }
+    .card-media img,
+    .card-media video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--duration-slow) var(--ease-out);
+    }
+    .card:hover .card-media img,
+    .card:hover .card-media video {
+      transform: scale(1.03);
+    }
+
+    /* ==================== SECTION HEADER ==================== */
+    
+    .section-header {
+      margin-bottom: 48px;
+    }
+
+    /* ==================== FORM STYLES ==================== */
+    
     .form-step {
       display: none;
       opacity: 0;
-      transform: translateX(20px);
+      transform: translateX(12px);
     }
     .form-step.active {
       display: block;
       opacity: 1;
       transform: translateX(0);
-      transition: opacity 0.3s ease, transform 0.3s ease;
+      transition: opacity var(--duration-normal) var(--ease-out), 
+                  transform var(--duration-normal) var(--ease-out);
     }
 
-    /* Button hover effects */
-    .btn-primary {
-      background-color: var(--brand);
-      transition: all 0.3s ease;
+    .input-field {
+      width: 100%;
+      padding: 14px 18px;
+      font-size: 1rem;
+      background: var(--surface-primary);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-md);
+      transition: all var(--duration-fast) var(--ease-out);
     }
-    .btn-primary:hover {
-      background-color: #7B5FC4;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(144, 119, 209, 0.35);
+    .input-field:hover {
+      border-color: var(--neutral-400);
     }
-
-    .btn-secondary {
-      border: 1.5px solid var(--brand);
-      color: var(--brand);
-      transition: all 0.3s ease;
-    }
-    .btn-secondary:hover {
-      background-color: var(--brand-subtle);
-    }
-
-    /* Card hover */
-    .card-hover {
-      transition: all 0.3s ease;
-    }
-    .card-hover:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(144, 119, 209, 0.12);
-    }
-
-    /* Focus states */
-    input:focus, select:focus, textarea:focus {
+    .input-field:focus {
       outline: none;
-      border-color: var(--brand);
-      box-shadow: 0 0 0 3px rgba(144, 119, 209, 0.15);
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-subtle);
     }
 
-    /* Radio/Checkbox custom */
     .custom-radio {
-      transition: all 0.2s ease;
+      transition: all var(--duration-fast) var(--ease-out);
     }
     .custom-radio:hover {
-      border-color: var(--brand);
-      background-color: var(--brand-subtle);
+      border-color: var(--accent-light);
+      background: var(--accent-subtle);
     }
     .custom-radio.selected {
-      border-color: var(--brand);
-      background-color: var(--brand-lighter);
+      border-color: var(--accent);
+      background: var(--accent-subtle);
     }
 
-    /* Progress bar */
     .progress-fill {
-      transition: width 0.4s ease;
+      transition: width var(--duration-slow) var(--ease-out);
     }
 
-    /* Reveal animation class */
+    /* ==================== ANIMATIONS ==================== */
+    
     .reveal {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(16px);
     }
 
-    /* Timeline connector */
+    .stagger-1 { transition-delay: 0ms; }
+    .stagger-2 { transition-delay: 80ms; }
+    .stagger-3 { transition-delay: 160ms; }
+    .stagger-4 { transition-delay: 240ms; }
+
+    /* ==================== ACCESSIBILITY ==================== */
+    
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+      .card:hover,
+      .btn-primary:hover {
+        transform: none;
+      }
+      .card:hover .card-media img,
+      .card:hover .card-media video {
+        transform: none;
+      }
+    }
+
+    /* Focus visible for keyboard nav */
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* ==================== SCROLLBAR ==================== */
+    
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--neutral-100);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--neutral-300);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--neutral-400);
+    }
+
+    /* ==================== TIMELINE ==================== */
+    
     .timeline-connector {
-      background: linear-gradient(to right, var(--brand-light), var(--brand), var(--brand-light));
+      background: linear-gradient(to right, var(--neutral-200), var(--accent), var(--neutral-200));
+    }
+
+    /* ==================== GRADIENT DECORATIVE ==================== */
+    
+    .gradient-blur {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(144, 119, 209, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(60px);
+    }
+
+    .gradient-line {
+      background: linear-gradient(90deg, transparent, var(--neutral-200), transparent);
+      height: 1px;
     }
   </style>
 
@@ -166,21 +458,31 @@
       theme: {
         extend: {
           colors: {
-            brand: {
+            neutral: {
+              50: '#FAFAFA',
+              100: '#F5F5F5',
+              200: '#E5E5E5',
+              300: '#D4D4D4',
+              400: '#A3A3A3',
+              500: '#737373',
+              600: '#525252',
+              700: '#404040',
+              800: '#262626',
+              900: '#171717'
+            },
+            accent: {
               DEFAULT: '#9077D1',
+              hover: '#7B5FC4',
               light: '#B8A9E3',
-              lighter: '#E8E3F5',
-              subtle: '#F5F3FA'
-            },
-            surface: {
-              primary: '#FDFCFE',
-              secondary: '#F9F7FC'
-            },
-            content: {
-              primary: '#1F1F23',
-              secondary: '#5A5A66',
-              muted: '#8E8E9A'
+              subtle: '#F3F0FA'
             }
+          },
+          maxWidth: {
+            'container': '1200px'
+          },
+          spacing: {
+            '18': '4.5rem',
+            '22': '5.5rem'
           }
         }
       }
@@ -194,147 +496,168 @@
   <div class="gradient-blur fixed bottom-1/4 left-0 opacity-30"></div>
 
   <!-- ========== HEADER ========== -->
-  <header class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-brand-lighter">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-      <div class="flex items-center gap-2">
-        <div class="w-8 h-8 rounded-lg bg-brand flex items-center justify-center">
+  <header class="nav-sticky fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-container mx-auto px-6 py-4 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-2.5 group">
+        <div class="w-9 h-9 rounded-xl bg-accent flex items-center justify-center transition-transform group-hover:scale-105">
           <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
           </svg>
         </div>
-        <span class="font-semibold text-content-primary text-sm sm:text-base">Sonrisa Digital</span>
-      </div>
-      <a href="#formulario" class="btn-primary text-white text-sm font-medium px-4 py-2.5 rounded-full">
+        <span class="font-medium text-neutral-900 text-sm tracking-tight">Smile Lab</span>
+      </a>
+
+      <!-- Nav Links (hidden on mobile) -->
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="#proceso" class="text-sm text-neutral-600 hover:text-neutral-900 transition-colors">Proceso</a>
+        <a href="#incluye" class="text-sm text-neutral-600 hover:text-neutral-900 transition-colors">Qué incluye</a>
+        <a href="#testimonios" class="text-sm text-neutral-600 hover:text-neutral-900 transition-colors">Resultados</a>
+      </nav>
+
+      <!-- CTA -->
+      <a href="#formulario" class="btn-pill btn-primary btn-sm">
         Postular
       </a>
     </div>
   </header>
 
   <!-- ========== HERO ========== -->
-  <section id="hero" class="relative min-h-screen flex items-center pt-20 pb-16 overflow-hidden">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 w-full">
-      <div class="max-w-2xl mx-auto text-center">
+  <section id="hero" class="relative min-h-screen flex items-center pt-24 pb-20 overflow-hidden grain">
+    <div class="max-w-container mx-auto px-6 w-full relative z-10">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         
-        <!-- Badge -->
-        <div class="reveal inline-flex items-center gap-2 bg-brand-subtle border border-brand-lighter rounded-full px-4 py-2 mb-6">
-          <span class="w-2 h-2 bg-brand rounded-full animate-pulse"></span>
-          <span class="text-sm font-medium text-brand">Evaluación exclusiva · Cupos limitados</span>
+        <!-- Left: Copy -->
+        <div class="max-w-xl">
+          <!-- Eyebrow + Badge -->
+          <div class="reveal flex items-center gap-3 mb-6">
+            <span class="badge badge-featured">Featured</span>
+            <span class="text-eyebrow">Smile Lab</span>
+          </div>
+
+          <!-- H1 Display -->
+          <h1 class="reveal text-display text-neutral-900 mb-6">
+            Diseña tu sonrisa<br>
+            <span class="text-accent">con precisión digital</span>
+          </h1>
+
+          <!-- Subtitle -->
+          <p class="reveal text-lg text-neutral-600 leading-relaxed mb-8">
+            Planificación personalizada, tecnología avanzada, resultados naturales. Explora el proceso que transforma sonrisas.
+          </p>
+
+          <!-- CTAs -->
+          <div class="reveal flex flex-wrap gap-4 mb-10">
+            <a href="#formulario" class="btn-pill btn-primary btn-lg">
+              Postular ahora
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </a>
+            <a href="#proceso" class="btn-pill btn-secondary btn-lg">
+              Learn more
+            </a>
+          </div>
+
+          <!-- Trust chips -->
+          <div class="reveal flex flex-wrap gap-2">
+            <span class="badge badge-outline">Planificación 3D</span>
+            <span class="badge badge-outline">Atención boutique</span>
+            <span class="badge badge-outline">Resultados naturales</span>
+          </div>
         </div>
 
-        <!-- H1 -->
-        <h1 class="reveal text-3xl sm:text-4xl lg:text-5xl font-bold text-content-primary leading-tight mb-6">
-          Mejora tu sonrisa de forma 
-          <span class="text-brand">natural y planificada</span>
-        </h1>
-
-        <!-- Subtitle -->
-        <p class="reveal text-lg sm:text-xl text-content-secondary leading-relaxed mb-8 max-w-xl mx-auto">
-          Diseño de Sonrisa Digital Personalizada. Proceso guiado, resultados armónicos, atención boutique.
-        </p>
-
-        <!-- CTA -->
-        <div class="reveal mb-8">
-          <a href="#formulario" class="btn-primary inline-flex items-center gap-2 text-white font-semibold px-8 py-4 rounded-full text-lg">
-            Postular a evaluación
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-            </svg>
-          </a>
+        <!-- Right: Media Card -->
+        <div class="reveal">
+          <div class="card card-lg relative overflow-hidden bg-neutral-100 aspect-[4/3] lg:aspect-square">
+            <!-- Placeholder visual -->
+            <div class="absolute inset-0 flex items-center justify-center dots-pattern">
+              <div class="text-center p-8">
+                <div class="w-20 h-20 rounded-2xl bg-accent/10 flex items-center justify-center mx-auto mb-4">
+                  <svg class="w-10 h-10 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                </div>
+                <p class="text-neutral-500 text-sm">Visualización del proceso</p>
+              </div>
+            </div>
+            <!-- Label -->
+            <div class="absolute top-4 left-4">
+              <span class="badge badge-experiment">Experiment</span>
+            </div>
+          </div>
         </div>
-
-        <!-- Trust badges -->
-        <div class="reveal flex flex-wrap justify-center gap-4 sm:gap-6 text-sm text-content-muted mb-10">
-          <span class="flex items-center gap-2">
-            <svg class="w-4 h-4 text-brand" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-            </svg>
-            Planificación digital
-          </span>
-          <span class="flex items-center gap-2">
-            <svg class="w-4 h-4 text-brand" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-            </svg>
-            Atención personalizada
-          </span>
-          <span class="flex items-center gap-2">
-            <svg class="w-4 h-4 text-brand" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-            </svg>
-            Resultados naturales
-          </span>
-        </div>
-
-        <!-- Clinical filter text -->
-        <p class="reveal text-sm text-content-muted bg-surface-secondary border border-brand-lighter rounded-xl px-6 py-4 max-w-lg mx-auto">
-          ⚠️ Proceso clínico personalizado, sujeto a evaluación profesional. No corresponde a cotización masiva ni tratamiento económico.
-        </p>
 
       </div>
     </div>
 
-    <!-- Decorative bottom gradient -->
-    <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-surface-secondary to-transparent"></div>
+    <!-- Decorative bottom -->
+    <div class="absolute bottom-0 left-0 right-0 h-px bg-neutral-200"></div>
   </section>
 
   <!-- ========== EMPATHY / PROBLEM ========== -->
-  <section id="problema" class="py-20 bg-surface-secondary">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="max-w-3xl mx-auto">
-        
-        <h2 class="reveal text-2xl sm:text-3xl font-bold text-content-primary text-center mb-4">
+  <section id="problema" class="py-24 bg-neutral-50 grain">
+    <div class="max-w-container mx-auto px-6">
+      
+      <!-- Section Header -->
+      <div class="section-header text-center max-w-2xl mx-auto">
+        <span class="reveal text-eyebrow block mb-3">Challenges</span>
+        <h2 class="reveal text-headline text-neutral-900 mb-4">
           ¿Por qué no es una decisión simple?
         </h2>
-        <p class="reveal text-content-secondary text-center mb-12 max-w-xl mx-auto">
+        <p class="reveal text-neutral-600">
           Entendemos que mejorar tu sonrisa implica más que estética. Es confianza, seguridad y bienestar.
         </p>
+      </div>
 
-        <div class="grid gap-4 sm:gap-6">
-          <div class="reveal card-hover bg-white rounded-2xl p-6 border border-brand-lighter flex items-start gap-4">
-            <div class="w-10 h-10 rounded-xl bg-brand-subtle flex items-center justify-center flex-shrink-0">
-              <svg class="w-5 h-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-            </div>
-            <div>
-              <h3 class="font-semibold text-content-primary mb-1">Inseguridad al sonreír</h3>
-              <p class="text-content-secondary text-sm">Evitas fotos o cubres tu boca al reír. Tu sonrisa debería ser motivo de confianza, no de preocupación.</p>
-            </div>
+      <!-- Cards Grid -->
+      <div class="grid sm:grid-cols-2 gap-4 max-w-4xl mx-auto">
+        
+        <div class="reveal card card-md flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-accent-subtle flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
           </div>
-
-          <div class="reveal card-hover bg-white rounded-2xl p-6 border border-brand-lighter flex items-start gap-4">
-            <div class="w-10 h-10 rounded-xl bg-brand-subtle flex items-center justify-center flex-shrink-0">
-              <svg class="w-5 h-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
-              </svg>
-            </div>
-            <div>
-              <h3 class="font-semibold text-content-primary mb-1">Miedo a resultados artificiales</h3>
-              <p class="text-content-secondary text-sm">Has visto sonrisas que no lucen naturales. Buscas armonía, no un cambio que se note forzado.</p>
-            </div>
+          <div>
+            <h3 class="text-title text-neutral-900 mb-1">Inseguridad al sonreír</h3>
+            <p class="text-caption text-neutral-600">Evitas fotos o cubres tu boca. Tu sonrisa debería ser confianza.</p>
           </div>
+        </div>
 
-          <div class="reveal card-hover bg-white rounded-2xl p-6 border border-brand-lighter flex items-start gap-4">
-            <div class="w-10 h-10 rounded-xl bg-brand-subtle flex items-center justify-center flex-shrink-0">
-              <svg class="w-5 h-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-            </div>
-            <div>
-              <h3 class="font-semibold text-content-primary mb-1">Falta de confianza en cotizaciones previas</h3>
-              <p class="text-content-secondary text-sm">Presupuestos sin explicación clara, sin plan definido. Necesitas entender qué se hará y por qué.</p>
-            </div>
+        <div class="reveal card card-md flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-accent-subtle flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+            </svg>
           </div>
+          <div>
+            <h3 class="text-title text-neutral-900 mb-1">Miedo a lo artificial</h3>
+            <p class="text-caption text-neutral-600">Buscas armonía, no un cambio que se note forzado.</p>
+          </div>
+        </div>
 
-          <div class="reveal card-hover bg-white rounded-2xl p-6 border border-brand-lighter flex items-start gap-4">
-            <div class="w-10 h-10 rounded-xl bg-brand-subtle flex items-center justify-center flex-shrink-0">
-              <svg class="w-5 h-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
-              </svg>
-            </div>
-            <div>
-              <h3 class="font-semibold text-content-primary mb-1">Deseo de solución planificada</h3>
-              <p class="text-content-secondary text-sm">No quieres improvisación. Buscas un proceso ordenado donde puedas ver el resultado antes de comenzar.</p>
-            </div>
+        <div class="reveal card card-md flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-accent-subtle flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-title text-neutral-900 mb-1">Cotizaciones confusas</h3>
+            <p class="text-caption text-neutral-600">Necesitas entender qué se hará y por qué.</p>
+          </div>
+        </div>
+
+        <div class="reveal card card-md flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-accent-subtle flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-title text-neutral-900 mb-1">Proceso ordenado</h3>
+            <p class="text-caption text-neutral-600">Ver el resultado antes de comenzar, sin improvisación.</p>
           </div>
         </div>
 
@@ -343,48 +666,63 @@
   </section>
 
   <!-- ========== SOLUTION / METHOD ========== -->
-  <section id="solucion" class="py-20 bg-white">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+  <section id="solucion" class="py-24">
+    <div class="max-w-container mx-auto px-6">
       
-      <div class="text-center mb-16">
-        <h2 class="reveal text-2xl sm:text-3xl font-bold text-content-primary mb-4">
-          La solución: Diseño de Sonrisa Digital Personalizada
+      <!-- Section Header -->
+      <div class="section-header text-center max-w-2xl mx-auto">
+        <span class="reveal text-eyebrow block mb-3">Method</span>
+        <h2 class="reveal text-headline text-neutral-900 mb-4">
+          Diseño de Sonrisa Digital
         </h2>
-        <p class="reveal text-content-secondary max-w-2xl mx-auto">
-          Un proceso guiado donde planificamos tu sonrisa antes de intervenir. Tecnología + experiencia clínica para resultados predecibles.
+        <p class="reveal text-neutral-600">
+          Planificamos tu sonrisa antes de intervenir. Tecnología + experiencia clínica.
         </p>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
+      <!-- Featured Cards -->
+      <div class="grid md:grid-cols-3 gap-6">
         
-        <div class="reveal card-hover bg-surface-secondary rounded-2xl p-8 border border-brand-lighter text-center">
-          <div class="w-14 h-14 rounded-2xl bg-brand-subtle flex items-center justify-center mx-auto mb-6">
-            <svg class="w-7 h-7 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
-            </svg>
+        <div class="reveal card card-lg text-center group">
+          <div class="card-media h-32 bg-neutral-100 rounded-xl mb-6 flex items-center justify-center">
+            <div class="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <svg class="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+              </svg>
+            </div>
           </div>
-          <h3 class="font-semibold text-content-primary text-lg mb-3">Evaluación avanzada</h3>
-          <p class="text-content-secondary text-sm">Análisis facial, dental y estético completo. Entendemos tu caso antes de proponer soluciones.</p>
+          <span class="badge badge-outline mb-3">Step 1</span>
+          <h3 class="text-title text-neutral-900 mb-2">Evaluación avanzada</h3>
+          <p class="text-caption text-neutral-600 mb-4">Análisis facial, dental y estético completo.</p>
+          <a href="#formulario" class="btn-pill btn-ghost btn-sm">Try it →</a>
         </div>
 
-        <div class="reveal card-hover bg-surface-secondary rounded-2xl p-8 border border-brand-lighter text-center">
-          <div class="w-14 h-14 rounded-2xl bg-brand-subtle flex items-center justify-center mx-auto mb-6">
-            <svg class="w-7 h-7 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-            </svg>
+        <div class="reveal card card-lg text-center group">
+          <div class="card-media h-32 bg-neutral-100 rounded-xl mb-6 flex items-center justify-center">
+            <div class="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <svg class="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+            </div>
           </div>
-          <h3 class="font-semibold text-content-primary text-lg mb-3">Planificación digital</h3>
-          <p class="text-content-secondary text-sm">Diseñamos tu sonrisa digitalmente. Ves el resultado proyectado antes de cualquier procedimiento.</p>
+          <span class="badge badge-featured mb-3">Featured</span>
+          <h3 class="text-title text-neutral-900 mb-2">Planificación digital</h3>
+          <p class="text-caption text-neutral-600 mb-4">Ves el resultado proyectado antes de comenzar.</p>
+          <a href="#formulario" class="btn-pill btn-ghost btn-sm">Learn more →</a>
         </div>
 
-        <div class="reveal card-hover bg-surface-secondary rounded-2xl p-8 border border-brand-lighter text-center">
-          <div class="w-14 h-14 rounded-2xl bg-brand-subtle flex items-center justify-center mx-auto mb-6">
-            <svg class="w-7 h-7 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
-            </svg>
+        <div class="reveal card card-lg text-center group">
+          <div class="card-media h-32 bg-neutral-100 rounded-xl mb-6 flex items-center justify-center">
+            <div class="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <svg class="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+              </svg>
+            </div>
           </div>
-          <h3 class="font-semibold text-content-primary text-lg mb-3">Ejecución personalizada</h3>
-          <p class="text-content-secondary text-sm">Propuesta clara y tratamiento adaptado a ti. Pocas sesiones, resultados naturales y duraderos.</p>
+          <span class="badge badge-outline mb-3">Step 3</span>
+          <h3 class="text-title text-neutral-900 mb-2">Ejecución precisa</h3>
+          <p class="text-caption text-neutral-600 mb-4">Pocas sesiones, resultados naturales y duraderos.</p>
+          <a href="#formulario" class="btn-pill btn-ghost btn-sm">Get started →</a>
         </div>
 
       </div>
@@ -392,72 +730,75 @@
   </section>
 
   <!-- ========== WHAT'S INCLUDED ========== -->
-  <section id="incluye" class="py-20 bg-surface-secondary">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+  <section id="incluye" class="py-24 bg-neutral-50">
+    <div class="max-w-container mx-auto px-6">
       
-      <div class="text-center mb-16">
-        <h2 class="reveal text-2xl sm:text-3xl font-bold text-content-primary mb-4">
+      <!-- Section Header -->
+      <div class="section-header text-center max-w-2xl mx-auto">
+        <span class="reveal text-eyebrow block mb-3">Tools</span>
+        <h2 class="reveal text-headline text-neutral-900 mb-4">
           Qué incluye el proceso
         </h2>
-        <p class="reveal text-content-secondary max-w-xl mx-auto">
-          Todo lo necesario para una experiencia premium y resultados que superan expectativas.
+        <p class="reveal text-neutral-600">
+          Todo lo necesario para una experiencia premium.
         </p>
       </div>
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <!-- Lightweight Cards Grid -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-4xl mx-auto">
         
-        <div class="reveal card-hover bg-white rounded-xl p-5 border border-brand-lighter flex items-center gap-4">
-          <div class="w-10 h-10 rounded-lg bg-brand flex items-center justify-center flex-shrink-0">
-            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+        <div class="reveal card card-sm flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-accent flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
             </svg>
           </div>
-          <span class="font-medium text-content-primary">Evaluación estética avanzada</span>
+          <span class="text-caption text-neutral-900 font-medium">Evaluación estética avanzada</span>
         </div>
 
-        <div class="reveal card-hover bg-white rounded-xl p-5 border border-brand-lighter flex items-center gap-4">
-          <div class="w-10 h-10 rounded-lg bg-brand flex items-center justify-center flex-shrink-0">
-            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+        <div class="reveal card card-sm flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-accent flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
             </svg>
           </div>
-          <span class="font-medium text-content-primary">Escaneo intraoral 3D</span>
+          <span class="text-caption text-neutral-900 font-medium">Escaneo intraoral 3D</span>
         </div>
 
-        <div class="reveal card-hover bg-white rounded-xl p-5 border border-brand-lighter flex items-center gap-4">
-          <div class="w-10 h-10 rounded-lg bg-brand flex items-center justify-center flex-shrink-0">
-            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+        <div class="reveal card card-sm flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-accent flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
             </svg>
           </div>
-          <span class="font-medium text-content-primary">Diseño digital personalizado</span>
+          <span class="text-caption text-neutral-900 font-medium">Diseño digital personalizado</span>
         </div>
 
-        <div class="reveal card-hover bg-white rounded-xl p-5 border border-brand-lighter flex items-center gap-4">
-          <div class="w-10 h-10 rounded-lg bg-brand flex items-center justify-center flex-shrink-0">
-            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+        <div class="reveal card card-sm flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-accent flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
             </svg>
           </div>
-          <span class="font-medium text-content-primary">Propuesta clara antes de iniciar</span>
+          <span class="text-caption text-neutral-900 font-medium">Propuesta clara antes de iniciar</span>
         </div>
 
-        <div class="reveal card-hover bg-white rounded-xl p-5 border border-brand-lighter flex items-center gap-4">
-          <div class="w-10 h-10 rounded-lg bg-brand flex items-center justify-center flex-shrink-0">
-            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+        <div class="reveal card card-sm flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-accent flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
             </svg>
           </div>
-          <span class="font-medium text-content-primary">Atención directa con especialista</span>
+          <span class="text-caption text-neutral-900 font-medium">Atención directa con especialista</span>
         </div>
 
-        <div class="reveal card-hover bg-white rounded-xl p-5 border border-brand-lighter flex items-center gap-4">
-          <div class="w-10 h-10 rounded-lg bg-brand flex items-center justify-center flex-shrink-0">
-            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+        <div class="reveal card card-sm flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-accent flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
             </svg>
           </div>
-          <span class="font-medium text-content-primary">Ejecución en pocas sesiones</span>
+          <span class="text-caption text-neutral-900 font-medium">Ejecución en pocas sesiones</span>
         </div>
 
       </div>
@@ -465,92 +806,86 @@
   </section>
 
   <!-- ========== FOR WHOM YES / NO ========== -->
-  <section id="para-quien" class="py-20 bg-white">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+  <section id="para-quien" class="py-24">
+    <div class="max-w-container mx-auto px-6">
       
-      <div class="text-center mb-16">
-        <h2 class="reveal text-2xl sm:text-3xl font-bold text-content-primary mb-4">
+      <!-- Section Header -->
+      <div class="section-header text-center max-w-2xl mx-auto">
+        <span class="reveal text-eyebrow block mb-3">Fit Check</span>
+        <h2 class="reveal text-headline text-neutral-900 mb-4">
           ¿Es para ti?
         </h2>
-        <p class="reveal text-content-secondary max-w-xl mx-auto">
-          Este proceso está diseñado para personas con expectativas claras y compromiso real.
+        <p class="reveal text-neutral-600">
+          Diseñado para personas con expectativas claras.
         </p>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-4xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
         
         <!-- YES column -->
-        <div class="reveal card-hover bg-brand-subtle rounded-2xl p-8 border border-brand-lighter">
+        <div class="reveal card card-lg bg-accent-subtle border-accent/20">
           <div class="flex items-center gap-3 mb-6">
-            <div class="w-10 h-10 rounded-full bg-brand flex items-center justify-center">
-              <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-              </svg>
-            </div>
-            <h3 class="font-semibold text-content-primary text-lg">Sí es para ti si...</h3>
+            <span class="badge badge-featured">Ideal</span>
+            <h3 class="text-title text-neutral-900">Sí es para ti si...</h3>
           </div>
-          <ul class="space-y-4">
+          <ul class="space-y-3">
             <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-brand flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+              <svg class="w-5 h-5 text-accent flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
               </svg>
-              <span class="text-content-secondary">Buscas un resultado natural y armónico</span>
+              <span class="text-caption text-neutral-700">Buscas un resultado natural y armónico</span>
             </li>
             <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-brand flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+              <svg class="w-5 h-5 text-accent flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
               </svg>
-              <span class="text-content-secondary">Valoras la planificación y tecnología</span>
+              <span class="text-caption text-neutral-700">Valoras la planificación y tecnología</span>
             </li>
             <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-brand flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+              <svg class="w-5 h-5 text-accent flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
               </svg>
-              <span class="text-content-secondary">Estás dispuesto(a) a invertir en ti</span>
+              <span class="text-caption text-neutral-700">Estás dispuesto(a) a invertir en ti</span>
             </li>
             <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-brand flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+              <svg class="w-5 h-5 text-accent flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
               </svg>
-              <span class="text-content-secondary">Quieres confianza y previsibilidad</span>
+              <span class="text-caption text-neutral-700">Quieres confianza y previsibilidad</span>
             </li>
           </ul>
         </div>
 
         <!-- NO column -->
-        <div class="reveal card-hover bg-surface-secondary rounded-2xl p-8 border border-brand-lighter">
+        <div class="reveal card card-lg">
           <div class="flex items-center gap-3 mb-6">
-            <div class="w-10 h-10 rounded-full bg-content-muted flex items-center justify-center">
-              <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
-              </svg>
-            </div>
-            <h3 class="font-semibold text-content-primary text-lg">No es para ti si...</h3>
+            <span class="badge badge-outline">Not a fit</span>
+            <h3 class="text-title text-neutral-900">No es para ti si...</h3>
           </div>
-          <ul class="space-y-4">
+          <ul class="space-y-3">
             <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-content-muted flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+              <svg class="w-5 h-5 text-neutral-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
               </svg>
-              <span class="text-content-secondary">Buscas la opción más económica</span>
+              <span class="text-caption text-neutral-600">Buscas la opción más económica</span>
             </li>
             <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-content-muted flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+              <svg class="w-5 h-5 text-neutral-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
               </svg>
-              <span class="text-content-secondary">Solo quieres cotizar por curiosidad</span>
+              <span class="text-caption text-neutral-600">Solo quieres cotizar por curiosidad</span>
             </li>
             <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-content-muted flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+              <svg class="w-5 h-5 text-neutral-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
               </svg>
-              <span class="text-content-secondary">No estás listo(a) para decidir pronto</span>
+              <span class="text-caption text-neutral-600">No estás listo(a) para decidir pronto</span>
             </li>
             <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-content-muted flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+              <svg class="w-5 h-5 text-neutral-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
               </svg>
-              <span class="text-content-secondary">Comparas solo por precio</span>
+              <span class="text-caption text-neutral-600">Comparas solo por precio</span>
             </li>
           </ul>
         </div>
@@ -560,54 +895,49 @@
   </section>
 
   <!-- ========== INVESTMENT / TRANSPARENCY ========== -->
-  <section id="inversion" class="py-20 bg-surface-secondary">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+  <section id="inversion" class="py-24 bg-neutral-50 grain">
+    <div class="max-w-container mx-auto px-6">
       <div class="max-w-3xl mx-auto text-center">
         
-        <div class="reveal inline-flex items-center gap-2 bg-white border border-brand-lighter rounded-full px-4 py-2 mb-6">
-          <svg class="w-4 h-4 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-          </svg>
-          <span class="text-sm font-medium text-content-secondary">Transparencia</span>
-        </div>
-
-        <h2 class="reveal text-2xl sm:text-3xl font-bold text-content-primary mb-6">
+        <!-- Section Header -->
+        <span class="reveal text-eyebrow block mb-3">Transparency</span>
+        <h2 class="reveal text-headline text-neutral-900 mb-4">
           Sobre la inversión
         </h2>
-
-        <p class="reveal text-content-secondary text-lg leading-relaxed mb-8">
-          Este es un tratamiento de <strong class="text-content-primary">inversión media-alta</strong>, acorde a la planificación digital, tecnología utilizada y atención personalizada que recibirás.
+        <p class="reveal text-neutral-600 mb-10">
+          Tratamiento de <strong class="text-neutral-900">inversión media-alta</strong>, acorde a la tecnología y atención personalizada.
         </p>
 
-        <div class="reveal bg-white rounded-2xl p-8 border border-brand-lighter">
+        <!-- Info Cards -->
+        <div class="reveal card card-lg">
           <div class="grid sm:grid-cols-2 gap-6 text-left">
             <div class="flex items-start gap-4">
-              <div class="w-10 h-10 rounded-xl bg-brand-subtle flex items-center justify-center flex-shrink-0">
-                <svg class="w-5 h-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="w-10 h-10 rounded-xl bg-accent-subtle flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
               </div>
               <div>
-                <h4 class="font-semibold text-content-primary mb-1">Inversión personalizada</h4>
-                <p class="text-content-secondary text-sm">Se define según tu caso específico en la evaluación clínica.</p>
+                <h4 class="text-title text-neutral-900 mb-1">Inversión personalizada</h4>
+                <p class="text-caption text-neutral-600">Se define según tu caso en la evaluación clínica.</p>
               </div>
             </div>
             <div class="flex items-start gap-4">
-              <div class="w-10 h-10 rounded-xl bg-brand-subtle flex items-center justify-center flex-shrink-0">
-                <svg class="w-5 h-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="w-10 h-10 rounded-xl bg-accent-subtle flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
                 </svg>
               </div>
               <div>
-                <h4 class="font-semibold text-content-primary mb-1">Facilidades disponibles</h4>
-                <p class="text-content-secondary text-sm">Opciones de pago flexibles que se conversan en la consulta.</p>
+                <h4 class="text-title text-neutral-900 mb-1">Facilidades disponibles</h4>
+                <p class="text-caption text-neutral-600">Opciones de pago flexibles en la consulta.</p>
               </div>
             </div>
           </div>
         </div>
 
-        <p class="reveal text-sm text-content-muted mt-6">
-          No publicamos precios fijos porque cada sonrisa es única. La inversión se presenta de forma clara y sin sorpresas después de la evaluación.
+        <p class="reveal text-caption text-neutral-500 mt-6">
+          No publicamos precios fijos porque cada sonrisa es única.
         </p>
 
       </div>
@@ -615,133 +945,85 @@
   </section>
 
   <!-- ========== PROCESS TIMELINE ========== -->
-  <section id="proceso" class="py-20 bg-white">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+  <section id="proceso" class="py-24">
+    <div class="max-w-container mx-auto px-6">
       
-      <div class="text-center mb-16">
-        <h2 class="reveal text-2xl sm:text-3xl font-bold text-content-primary mb-4">
+      <!-- Section Header -->
+      <div class="section-header text-center max-w-2xl mx-auto">
+        <span class="reveal text-eyebrow block mb-3">Sessions</span>
+        <h2 class="reveal text-headline text-neutral-900 mb-4">
           ¿Cómo funciona?
         </h2>
-        <p class="reveal text-content-secondary max-w-xl mx-auto">
-          Un proceso claro y ordenado, sin improvisaciones.
+        <p class="reveal text-neutral-600">
+          Un proceso claro y ordenado.
         </p>
       </div>
 
-      <!-- Mobile: Vertical timeline -->
-      <div class="md:hidden space-y-6">
-        <div class="reveal flex gap-4">
-          <div class="flex flex-col items-center">
-            <div class="w-10 h-10 rounded-full bg-brand flex items-center justify-center text-white font-semibold">1</div>
-            <div class="w-0.5 h-full bg-brand-lighter mt-2"></div>
-          </div>
-          <div class="pb-6">
-            <h4 class="font-semibold text-content-primary mb-1">Postulas</h4>
-            <p class="text-content-secondary text-sm">Completas el formulario de precalificación.</p>
-          </div>
+      <!-- Timeline Cards -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 max-w-5xl mx-auto">
+        
+        <div class="reveal card card-md text-center">
+          <div class="w-10 h-10 rounded-full bg-accent flex items-center justify-center text-white font-semibold mx-auto mb-4">1</div>
+          <h4 class="text-title text-neutral-900 mb-1">Postulas</h4>
+          <p class="text-caption text-neutral-600">Completas el formulario</p>
         </div>
-        <div class="reveal flex gap-4">
-          <div class="flex flex-col items-center">
-            <div class="w-10 h-10 rounded-full bg-brand flex items-center justify-center text-white font-semibold">2</div>
-            <div class="w-0.5 h-full bg-brand-lighter mt-2"></div>
-          </div>
-          <div class="pb-6">
-            <h4 class="font-semibold text-content-primary mb-1">Confirmamos</h4>
-            <p class="text-content-secondary text-sm">Evaluamos si eres candidato(a) para el proceso.</p>
-          </div>
-        </div>
-        <div class="reveal flex gap-4">
-          <div class="flex flex-col items-center">
-            <div class="w-10 h-10 rounded-full bg-brand flex items-center justify-center text-white font-semibold">3</div>
-            <div class="w-0.5 h-full bg-brand-lighter mt-2"></div>
-          </div>
-          <div class="pb-6">
-            <h4 class="font-semibold text-content-primary mb-1">Coordinas</h4>
-            <p class="text-content-secondary text-sm">Agendas tu evaluación por WhatsApp.</p>
-          </div>
-        </div>
-        <div class="reveal flex gap-4">
-          <div class="flex flex-col items-center">
-            <div class="w-10 h-10 rounded-full bg-brand flex items-center justify-center text-white font-semibold">4</div>
-            <div class="w-0.5 h-full bg-brand-lighter mt-2"></div>
-          </div>
-          <div class="pb-6">
-            <h4 class="font-semibold text-content-primary mb-1">Evaluación</h4>
-            <p class="text-content-secondary text-sm">Visita en clínica con análisis completo.</p>
-          </div>
-        </div>
-        <div class="reveal flex gap-4">
-          <div class="flex flex-col items-center">
-            <div class="w-10 h-10 rounded-full bg-brand flex items-center justify-center text-white font-semibold">5</div>
-          </div>
-          <div>
-            <h4 class="font-semibold text-content-primary mb-1">Plan personalizado</h4>
-            <p class="text-content-secondary text-sm">Recibes tu propuesta y comenzamos.</p>
-          </div>
-        </div>
-      </div>
 
-      <!-- Desktop: Horizontal timeline -->
-      <div class="hidden md:block">
-        <div class="relative">
-          <div class="absolute top-5 left-0 right-0 h-0.5 timeline-connector"></div>
-          <div class="grid grid-cols-5 gap-4">
-            <div class="reveal text-center relative">
-              <div class="w-10 h-10 rounded-full bg-brand flex items-center justify-center text-white font-semibold mx-auto mb-4 relative z-10">1</div>
-              <h4 class="font-semibold text-content-primary mb-1">Postulas</h4>
-              <p class="text-content-secondary text-sm">Completas el formulario</p>
-            </div>
-            <div class="reveal text-center relative">
-              <div class="w-10 h-10 rounded-full bg-brand flex items-center justify-center text-white font-semibold mx-auto mb-4 relative z-10">2</div>
-              <h4 class="font-semibold text-content-primary mb-1">Confirmamos</h4>
-              <p class="text-content-secondary text-sm">Evaluamos tu caso</p>
-            </div>
-            <div class="reveal text-center relative">
-              <div class="w-10 h-10 rounded-full bg-brand flex items-center justify-center text-white font-semibold mx-auto mb-4 relative z-10">3</div>
-              <h4 class="font-semibold text-content-primary mb-1">Coordinas</h4>
-              <p class="text-content-secondary text-sm">Agendas por WhatsApp</p>
-            </div>
-            <div class="reveal text-center relative">
-              <div class="w-10 h-10 rounded-full bg-brand flex items-center justify-center text-white font-semibold mx-auto mb-4 relative z-10">4</div>
-              <h4 class="font-semibold text-content-primary mb-1">Evaluación</h4>
-              <p class="text-content-secondary text-sm">Visita en clínica</p>
-            </div>
-            <div class="reveal text-center relative">
-              <div class="w-10 h-10 rounded-full bg-brand flex items-center justify-center text-white font-semibold mx-auto mb-4 relative z-10">5</div>
-              <h4 class="font-semibold text-content-primary mb-1">Plan</h4>
-              <p class="text-content-secondary text-sm">Propuesta y ejecución</p>
-            </div>
-          </div>
+        <div class="reveal card card-md text-center">
+          <div class="w-10 h-10 rounded-full bg-accent flex items-center justify-center text-white font-semibold mx-auto mb-4">2</div>
+          <h4 class="text-title text-neutral-900 mb-1">Confirmamos</h4>
+          <p class="text-caption text-neutral-600">Evaluamos tu caso</p>
         </div>
+
+        <div class="reveal card card-md text-center">
+          <div class="w-10 h-10 rounded-full bg-accent flex items-center justify-center text-white font-semibold mx-auto mb-4">3</div>
+          <h4 class="text-title text-neutral-900 mb-1">Coordinas</h4>
+          <p class="text-caption text-neutral-600">Agendas por WhatsApp</p>
+        </div>
+
+        <div class="reveal card card-md text-center">
+          <div class="w-10 h-10 rounded-full bg-accent flex items-center justify-center text-white font-semibold mx-auto mb-4">4</div>
+          <h4 class="text-title text-neutral-900 mb-1">Evaluación</h4>
+          <p class="text-caption text-neutral-600">Visita en clínica</p>
+        </div>
+
+        <div class="reveal card card-md text-center">
+          <div class="w-10 h-10 rounded-full bg-accent flex items-center justify-center text-white font-semibold mx-auto mb-4">5</div>
+          <h4 class="text-title text-neutral-900 mb-1">Plan</h4>
+          <p class="text-caption text-neutral-600">Propuesta y ejecución</p>
+        </div>
+
       </div>
 
     </div>
   </section>
 
   <!-- ========== MULTI-STEP FORM ========== -->
-  <section id="formulario" class="py-20 bg-white">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+  <section id="formulario" class="py-24 bg-neutral-50 grain">
+    <div class="max-w-container mx-auto px-6">
       <div class="max-w-xl mx-auto">
         
-        <div class="text-center mb-10">
-          <h2 class="reveal text-2xl sm:text-3xl font-bold text-content-primary mb-4">
+        <!-- Section Header -->
+        <div class="section-header text-center">
+          <span class="reveal text-eyebrow block mb-3">Apply</span>
+          <h2 class="reveal text-headline text-neutral-900 mb-4">
             Postula a tu evaluación
           </h2>
-          <p class="reveal text-content-secondary">
-            Completa el formulario para verificar si eres candidato(a) al proceso.
+          <p class="reveal text-neutral-600">
+            Completa el formulario para verificar si eres candidato(a).
           </p>
         </div>
 
         <!-- Form Container -->
-        <div id="form-container" class="reveal bg-surface-secondary rounded-2xl p-6 sm:p-8 border border-brand-lighter">
+        <div id="form-container" class="reveal card card-lg">
           
           <!-- Progress Bar -->
           <div class="mb-8">
-            <div class="flex justify-between text-sm text-content-muted mb-2">
+            <div class="flex justify-between text-caption text-neutral-500 mb-2">
               <span>Paso <span id="current-step">1</span> de 6</span>
               <span id="progress-percent">17%</span>
             </div>
-            <div class="h-2 bg-brand-lighter rounded-full overflow-hidden">
-              <div id="progress-bar" class="h-full bg-brand progress-fill rounded-full" style="width: 17%"></div>
+            <div class="h-1.5 bg-neutral-200 rounded-full overflow-hidden">
+              <div id="progress-bar" class="h-full bg-accent progress-fill rounded-full" style="width: 17%"></div>
             </div>
           </div>
 
@@ -749,121 +1031,121 @@
             
             <!-- Step 1: Name -->
             <div class="form-step active" data-step="1">
-              <label for="first_name" class="block text-content-primary font-medium mb-2">¿Cuál es tu nombre?</label>
+              <label for="first_name" class="block text-neutral-900 font-medium mb-2">¿Cuál es tu nombre?</label>
               <input 
                 type="text" 
                 id="first_name" 
                 name="first_name" 
                 placeholder="Tu nombre"
                 required
-                class="w-full px-4 py-3 rounded-xl border border-brand-lighter bg-white text-content-primary placeholder-content-muted focus:border-brand focus:ring-2 focus:ring-brand/20 transition-all"
+                class="input-field"
               >
-              <p class="text-sm text-content-muted mt-2">Así podremos personalizar tu experiencia.</p>
+              <p class="text-caption text-neutral-500 mt-2">Así podremos personalizar tu experiencia.</p>
             </div>
 
             <!-- Step 2: Goal -->
             <div class="form-step" data-step="2">
-              <label class="block text-content-primary font-medium mb-4">¿Cuál es tu objetivo principal?</label>
+              <label class="block text-neutral-900 font-medium mb-4">¿Cuál es tu objetivo principal?</label>
               <div class="space-y-3">
-                <label class="custom-radio block p-4 rounded-xl border border-brand-lighter bg-white cursor-pointer">
+                <label class="custom-radio block p-4 rounded-xl border border-neutral-200 bg-white cursor-pointer">
                   <input type="radio" name="primary_goal" value="armonica" class="sr-only">
-                  <span class="text-content-primary">Sonrisa más armónica y natural</span>
+                  <span class="text-neutral-900">Sonrisa más armónica y natural</span>
                 </label>
-                <label class="custom-radio block p-4 rounded-xl border border-brand-lighter bg-white cursor-pointer">
+                <label class="custom-radio block p-4 rounded-xl border border-neutral-200 bg-white cursor-pointer">
                   <input type="radio" name="primary_goal" value="confianza" class="sr-only">
-                  <span class="text-content-primary">Mejorar confianza al sonreír</span>
+                  <span class="text-neutral-900">Mejorar confianza al sonreír</span>
                 </label>
-                <label class="custom-radio block p-4 rounded-xl border border-brand-lighter bg-white cursor-pointer">
+                <label class="custom-radio block p-4 rounded-xl border border-neutral-200 bg-white cursor-pointer">
                   <input type="radio" name="primary_goal" value="corregir" class="sr-only">
-                  <span class="text-content-primary">Corregir detalles estéticos</span>
+                  <span class="text-neutral-900">Corregir detalles estéticos</span>
                 </label>
-                <label class="custom-radio block p-4 rounded-xl border border-brand-lighter bg-white cursor-pointer">
+                <label class="custom-radio block p-4 rounded-xl border border-neutral-200 bg-white cursor-pointer">
                   <input type="radio" name="primary_goal" value="no_seguro" class="sr-only">
-                  <span class="text-content-primary">No estoy seguro(a)</span>
+                  <span class="text-neutral-900">No estoy seguro(a)</span>
                 </label>
               </div>
             </div>
 
             <!-- Step 3: Timeline -->
             <div class="form-step" data-step="3">
-              <label class="block text-content-primary font-medium mb-4">¿En qué plazo te gustaría comenzar?</label>
+              <label class="block text-neutral-900 font-medium mb-4">¿En qué plazo te gustaría comenzar?</label>
               <div class="space-y-3">
-                <label class="custom-radio block p-4 rounded-xl border border-brand-lighter bg-white cursor-pointer">
+                <label class="custom-radio block p-4 rounded-xl border border-neutral-200 bg-white cursor-pointer">
                   <input type="radio" name="timeline" value="7-14" class="sr-only">
-                  <span class="text-content-primary">En los próximos 7–14 días</span>
+                  <span class="text-neutral-900">En los próximos 7–14 días</span>
                 </label>
-                <label class="custom-radio block p-4 rounded-xl border border-brand-lighter bg-white cursor-pointer">
+                <label class="custom-radio block p-4 rounded-xl border border-neutral-200 bg-white cursor-pointer">
                   <input type="radio" name="timeline" value="este_mes" class="sr-only">
-                  <span class="text-content-primary">Este mes</span>
+                  <span class="text-neutral-900">Este mes</span>
                 </label>
-                <label class="custom-radio block p-4 rounded-xl border border-brand-lighter bg-white cursor-pointer">
+                <label class="custom-radio block p-4 rounded-xl border border-neutral-200 bg-white cursor-pointer">
                   <input type="radio" name="timeline" value="60_dias" class="sr-only">
-                  <span class="text-content-primary">En más de 60 días</span>
+                  <span class="text-neutral-900">En más de 60 días</span>
                 </label>
-                <label class="custom-radio block p-4 rounded-xl border border-brand-lighter bg-white cursor-pointer">
+                <label class="custom-radio block p-4 rounded-xl border border-neutral-200 bg-white cursor-pointer">
                   <input type="radio" name="timeline" value="no_seguro" class="sr-only">
-                  <span class="text-content-primary">No estoy seguro(a)</span>
+                  <span class="text-neutral-900">No estoy seguro(a)</span>
                 </label>
               </div>
             </div>
 
             <!-- Step 4: Priority -->
             <div class="form-step" data-step="4">
-              <label class="block text-content-primary font-medium mb-4">¿Cuál es tu nivel de prioridad?</label>
+              <label class="block text-neutral-900 font-medium mb-4">¿Cuál es tu nivel de prioridad?</label>
               <div class="space-y-3">
-                <label class="custom-radio block p-4 rounded-xl border border-brand-lighter bg-white cursor-pointer">
+                <label class="custom-radio block p-4 rounded-xl border border-neutral-200 bg-white cursor-pointer">
                   <input type="radio" name="priority" value="alta" class="sr-only">
-                  <span class="text-content-primary font-medium">Alta</span>
-                  <span class="block text-content-muted text-sm mt-1">Quiero resolverlo pronto</span>
+                  <span class="text-neutral-900 font-medium">Alta</span>
+                  <span class="block text-neutral-500 text-sm mt-1">Quiero resolverlo pronto</span>
                 </label>
-                <label class="custom-radio block p-4 rounded-xl border border-brand-lighter bg-white cursor-pointer">
+                <label class="custom-radio block p-4 rounded-xl border border-neutral-200 bg-white cursor-pointer">
                   <input type="radio" name="priority" value="media" class="sr-only">
-                  <span class="text-content-primary font-medium">Media</span>
-                  <span class="block text-content-muted text-sm mt-1">Quiero evaluar opciones</span>
+                  <span class="text-neutral-900 font-medium">Media</span>
+                  <span class="block text-neutral-500 text-sm mt-1">Quiero evaluar opciones</span>
                 </label>
-                <label class="custom-radio block p-4 rounded-xl border border-brand-lighter bg-white cursor-pointer">
+                <label class="custom-radio block p-4 rounded-xl border border-neutral-200 bg-white cursor-pointer">
                   <input type="radio" name="priority" value="explorando" class="sr-only">
-                  <span class="text-content-primary font-medium">Explorando</span>
-                  <span class="block text-content-muted text-sm mt-1">Solo estoy mirando</span>
+                  <span class="text-neutral-900 font-medium">Explorando</span>
+                  <span class="block text-neutral-500 text-sm mt-1">Solo estoy mirando</span>
                 </label>
               </div>
             </div>
 
             <!-- Step 5: Investment Range -->
             <div class="form-step" data-step="5">
-              <label class="block text-content-primary font-medium mb-2">¿Cuál es tu rango de inversión esperado?</label>
-              <p class="text-sm text-content-muted mb-4">Esto nos ayuda a orientarte mejor. La inversión final se define en evaluación.</p>
+              <label class="block text-neutral-900 font-medium mb-2">¿Cuál es tu rango de inversión esperado?</label>
+              <p class="text-caption text-neutral-500 mb-4">Esto nos ayuda a orientarte mejor.</p>
               <div class="space-y-3">
-                <label class="custom-radio block p-4 rounded-xl border border-brand-lighter bg-white cursor-pointer">
+                <label class="custom-radio block p-4 rounded-xl border border-neutral-200 bg-white cursor-pointer">
                   <input type="radio" name="investment_range" value="1500-3000" class="sr-only">
-                  <span class="text-content-primary">$1.500 – $3.000 USD</span>
+                  <span class="text-neutral-900">$1.500 – $3.000 USD</span>
                 </label>
-                <label class="custom-radio block p-4 rounded-xl border border-brand-lighter bg-white cursor-pointer">
+                <label class="custom-radio block p-4 rounded-xl border border-neutral-200 bg-white cursor-pointer">
                   <input type="radio" name="investment_range" value="3000-6000" class="sr-only">
-                  <span class="text-content-primary">$3.000 – $6.000 USD</span>
+                  <span class="text-neutral-900">$3.000 – $6.000 USD</span>
                 </label>
-                <label class="custom-radio block p-4 rounded-xl border border-brand-lighter bg-white cursor-pointer">
+                <label class="custom-radio block p-4 rounded-xl border border-neutral-200 bg-white cursor-pointer">
                   <input type="radio" name="investment_range" value="6000+" class="sr-only">
-                  <span class="text-content-primary">$6.000+ USD</span>
+                  <span class="text-neutral-900">$6.000+ USD</span>
                 </label>
-                <label class="custom-radio block p-4 rounded-xl border border-brand-lighter bg-white cursor-pointer">
+                <label class="custom-radio block p-4 rounded-xl border border-neutral-200 bg-white cursor-pointer">
                   <input type="radio" name="investment_range" value="no_declara" class="sr-only">
-                  <span class="text-content-primary">Prefiero no decir</span>
+                  <span class="text-neutral-900">Prefiero no decir</span>
                 </label>
               </div>
             </div>
 
             <!-- Step 6: Consent -->
             <div class="form-step" data-step="6">
-              <label class="block text-content-primary font-medium mb-4">Último paso: confirmación</label>
+              <label class="block text-neutral-900 font-medium mb-4">Último paso: confirmación</label>
               <div class="space-y-4">
-                <label class="custom-radio flex items-start gap-3 p-4 rounded-xl border border-brand-lighter bg-white cursor-pointer">
-                  <input type="checkbox" name="accepted_conditions" value="true" class="mt-1 w-5 h-5 rounded border-brand-lighter text-brand focus:ring-brand">
-                  <span class="text-content-secondary text-sm">Entiendo que esta es una evaluación para un tratamiento premium y no corresponde a una cotización masiva.</span>
+                <label class="custom-radio flex items-start gap-3 p-4 rounded-xl border border-neutral-200 bg-white cursor-pointer">
+                  <input type="checkbox" name="accepted_conditions" value="true" class="mt-1 w-5 h-5 rounded border-neutral-300 text-accent focus:ring-accent">
+                  <span class="text-caption text-neutral-600">Entiendo que esta es una evaluación para un tratamiento premium.</span>
                 </label>
-                <label class="custom-radio flex items-start gap-3 p-4 rounded-xl border border-brand-lighter bg-white cursor-pointer">
-                  <input type="checkbox" name="whatsapp_opt_in" value="true" class="mt-1 w-5 h-5 rounded border-brand-lighter text-brand focus:ring-brand">
-                  <span class="text-content-secondary text-sm">Acepto que me contacten por WhatsApp para coordinar mi evaluación.</span>
+                <label class="custom-radio flex items-start gap-3 p-4 rounded-xl border border-neutral-200 bg-white cursor-pointer">
+                  <input type="checkbox" name="whatsapp_opt_in" value="true" class="mt-1 w-5 h-5 rounded border-neutral-300 text-accent focus:ring-accent">
+                  <span class="text-caption text-neutral-600">Acepto que me contacten por WhatsApp.</span>
                 </label>
               </div>
             </div>
@@ -873,21 +1155,21 @@
               <button 
                 type="button" 
                 id="btn-prev" 
-                class="btn-secondary flex-1 py-3 px-6 rounded-xl font-medium hidden"
+                class="btn-pill btn-secondary flex-1 hidden"
               >
                 Volver
               </button>
               <button 
                 type="button" 
                 id="btn-next" 
-                class="btn-primary flex-1 py-3 px-6 rounded-xl font-medium text-white"
+                class="btn-pill btn-primary flex-1"
               >
                 Continuar
               </button>
               <button 
                 type="submit" 
                 id="btn-submit" 
-                class="btn-primary flex-1 py-3 px-6 rounded-xl font-medium text-white hidden"
+                class="btn-pill btn-primary flex-1 hidden"
               >
                 Enviar postulación
               </button>
@@ -900,19 +1182,19 @@
         <div id="result-container" class="hidden">
           
           <!-- Qualified Result (A/B) -->
-          <div id="result-qualified" class="hidden bg-brand-subtle rounded-2xl p-8 border border-brand-lighter text-center">
-            <div class="w-16 h-16 rounded-full bg-brand flex items-center justify-center mx-auto mb-6">
+          <div id="result-qualified" class="hidden card card-lg bg-accent-subtle text-center">
+            <div class="w-16 h-16 rounded-full bg-accent flex items-center justify-center mx-auto mb-6">
               <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
               </svg>
             </div>
-            <h3 class="text-xl font-bold text-content-primary mb-2">¡Gracias, <span id="result-name"></span>!</h3>
-            <p class="text-content-secondary mb-6">Eres candidato(a) para la evaluación. Continúa por WhatsApp para coordinar tu cita.</p>
+            <h3 class="text-headline text-neutral-900 mb-2">¡Gracias, <span id="result-name"></span>!</h3>
+            <p class="text-neutral-600 mb-6">Eres candidato(a) para la evaluación. Continúa por WhatsApp.</p>
             <a 
               id="whatsapp-link" 
               href="#" 
               target="_blank"
-              class="btn-primary inline-flex items-center gap-2 text-white font-semibold px-8 py-4 rounded-full"
+              class="btn-pill btn-primary btn-lg inline-flex"
             >
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
               Ir a WhatsApp
@@ -920,15 +1202,15 @@
           </div>
 
           <!-- Not Qualified Result (C) -->
-          <div id="result-not-qualified" class="hidden bg-surface-secondary rounded-2xl p-8 border border-brand-lighter text-center">
-            <div class="w-16 h-16 rounded-full bg-content-muted flex items-center justify-center mx-auto mb-6">
+          <div id="result-not-qualified" class="hidden card card-lg text-center">
+            <div class="w-16 h-16 rounded-full bg-neutral-300 flex items-center justify-center mx-auto mb-6">
               <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
               </svg>
             </div>
-            <h3 class="text-xl font-bold text-content-primary mb-2">Gracias por tu interés</h3>
-            <p class="text-content-secondary mb-4">Este proceso está diseñado para casos de inversión media-alta con intención definida.</p>
-            <p class="text-content-muted text-sm">Si buscas opciones generales o tienes dudas, te invitamos a consultar directamente en la clínica.</p>
+            <h3 class="text-title text-neutral-900 mb-2">Gracias por tu interés</h3>
+            <p class="text-neutral-600 mb-4">Este proceso está diseñado para casos de inversión media-alta.</p>
+            <p class="text-caption text-neutral-500">Consulta directamente en la clínica para más opciones.</p>
           </div>
 
         </div>
@@ -938,31 +1220,50 @@
   </section>
 
   <!-- ========== FOOTER ========== -->
-  <footer class="py-12 bg-surface-secondary border-t border-brand-lighter">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="text-center">
+  <footer class="py-16 border-t border-neutral-200">
+    <div class="max-w-container mx-auto px-6">
+      <div class="grid md:grid-cols-3 gap-8 mb-12">
         
-        <div class="flex items-center justify-center gap-2 mb-4">
-          <div class="w-8 h-8 rounded-lg bg-brand flex items-center justify-center">
-            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
+        <!-- Brand -->
+        <div>
+          <div class="flex items-center gap-2.5 mb-4">
+            <div class="w-9 h-9 rounded-xl bg-accent flex items-center justify-center">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <span class="font-medium text-neutral-900">Smile Lab</span>
           </div>
-          <span class="font-semibold text-content-primary">Sonrisa Digital</span>
+          <p class="text-caption text-neutral-500">Diseño de sonrisa digital personalizada.</p>
         </div>
 
-        <p class="text-content-secondary text-sm mb-2">Santiago, Chile</p>
-        <p class="text-content-muted text-sm mb-6">Lunes a Viernes: 9:00 – 18:00</p>
+        <!-- Links -->
+        <div>
+          <h4 class="text-caption font-medium text-neutral-900 mb-4">Links</h4>
+          <ul class="space-y-2">
+            <li><a href="#proceso" class="text-caption text-neutral-600 hover:text-neutral-900 transition-colors">Proceso</a></li>
+            <li><a href="#incluye" class="text-caption text-neutral-600 hover:text-neutral-900 transition-colors">Qué incluye</a></li>
+            <li><a href="#formulario" class="text-caption text-neutral-600 hover:text-neutral-900 transition-colors">Postular</a></li>
+          </ul>
+        </div>
 
-        <div class="gradient-line w-32 mx-auto mb-6"></div>
-
-        <p class="text-content-muted text-xs max-w-md mx-auto">
-          Los resultados pueden variar según el diagnóstico clínico individual. Este sitio no constituye una oferta de servicios médicos. Tratamiento sujeto a evaluación profesional.
-        </p>
-
-        <p class="text-content-muted text-xs mt-4">© 2024 Clínica Dental. Todos los derechos reservados.</p>
+        <!-- Contact -->
+        <div>
+          <h4 class="text-caption font-medium text-neutral-900 mb-4">Contacto</h4>
+          <p class="text-caption text-neutral-600 mb-1">Santiago, Chile</p>
+          <p class="text-caption text-neutral-500">Lunes a Viernes: 9:00 – 18:00</p>
+        </div>
 
       </div>
+
+      <!-- Bottom -->
+      <div class="pt-8 border-t border-neutral-200 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <p class="text-caption text-neutral-500">© 2024 Smile Lab. Todos los derechos reservados.</p>
+        <p class="text-caption text-neutral-400 text-center sm:text-right max-w-md">
+          Los resultados pueden variar. Tratamiento sujeto a evaluación profesional.
+        </p>
+      </div>
+
     </div>
   </footer>
 
