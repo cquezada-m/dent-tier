@@ -27,18 +27,22 @@
         "url": "https://static.wixstatic.com/media/916115_8f4c3b0ab9ac4a51ad2613c68a382a0d~mv2.png/v1/fill/w_980%2Ch_980%2Cal_c%2Cq_90%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/916115_8f4c3b0ab9ac4a51ad2613c68a382a0d~mv2.png"
       }
     ],
-    "social_icons": [
+    "clinical_cases": [
       {
-        "name": "instagram-gradient.png",
-        "url": "https://static.wixstatic.com/media/11062b_55e4be1e75564866b6c28290f9a9d271~mv2.png/v1/fill/w_39%2Ch_39%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/11062b_55e4be1e75564866b6c28290f9a9d271~mv2.png"
+        "name": "Carillas de Porcelana",
+        "url": "https://static.wixstatic.com/media/916115_e23f115a14fa40f9bc2c371c6aa78390~mv2.png/v1/fill/w_2000,h_1080,al_c,q_95,enc_auto/916115_e23f115a14fa40f9bc2c371c6aa78390~mv2.png"
       },
       {
-        "name": "facebook.png",
-        "url": "https://static.wixstatic.com/media/23fd2a2be53141ed810f4d3dcdcd01fa.png/v1/fill/w_25%2Ch_25%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/23fd2a2be53141ed810f4d3dcdcd01fa.png"
+        "name": "Coronas de Porcelana y Carillas de Resina",
+        "url": "https://static.wixstatic.com/media/916115_96944a091d854d44854b988ef2fd9948~mv2.png/v1/fill/w_2000,h_1080,al_c,q_95,enc_auto/916115_96944a091d854d44854b988ef2fd9948~mv2.png"
       },
       {
-        "name": "instagram.png",
-        "url": "https://static.wixstatic.com/media/81af6121f84c41a5b4391d7d37fce12a.png/v1/fill/w_25%2Ch_25%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/81af6121f84c41a5b4391d7d37fce12a.png"
+        "name": "Restauraciones directas de Resina",
+        "url": "https://static.wixstatic.com/media/916115_a1fd0fe83296478a88021080f2e48904~mv2.png/v1/fill/w_2000,h_1080,al_c,q_95,enc_auto/916115_a1fd0fe83296478a88021080f2e48904~mv2.png"
+      },
+      {
+        "name": "Blanqueamiento Dental",
+        "url": "https://static.wixstatic.com/media/916115_065019e594a84a75be5136b1ab6fa58c~mv2.png/v1/fill/w_2000,h_1080,al_c,q_95,enc_auto/916115_065019e594a84a75be5136b1ab6fa58c~mv2.png"
       }
     ]
   }

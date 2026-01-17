@@ -460,3 +460,59 @@ body {
   );
   height: 1px;
 }
+
+/* ==================== CLINICAL CASES CAROUSEL ==================== */
+
+.clinical-carousel-wrapper {
+  position: relative;
+  margin: 0 -24px;
+  padding: 0 24px;
+}
+
+.clinical-carousel {
+  scroll-behavior: smooth;
+}
+
+.clinical-case-card .card {
+  height: 100%;
+}
+
+.clinical-case-card .card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+}
+
+.carousel-dot {
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.carousel-dot.active {
+  background: var(--accent);
+  width: 24px;
+}
+
+@media (max-width: 768px) {
+  .clinical-carousel-wrapper {
+    overflow: visible;
+  }
+
+  .clinical-carousel {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: 8px;
+    transform: none !important;
+  }
+
+  .clinical-carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .clinical-case-card {
+    scroll-snap-align: start;
+    min-width: 85vw;
+  }
+}

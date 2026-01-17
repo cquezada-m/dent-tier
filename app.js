@@ -873,5 +873,185 @@
   updateProgress();
   updateButtons();
 
+  // ==================== CLINICAL CASES CAROUSEL ====================
+
+  console.log("[Carousel] Initializing clinical cases carousel...");
+
+  const carousel = document.getElementById("clinical-carousel");
+  const prevBtn = document.getElementById("carousel-prev");
+  const nextBtn = document.getElementById("carousel-next");
+  const dotsContainer = document.getElementById("carousel-dots");
+
+  if (carousel && prevBtn && nextBtn && dotsContainer) {
+    let currentIndex = 0;
+    const cards = carousel.querySelectorAll(".clinical-case-card");
+    const totalCards = cards.length;
+
+    // Get visible cards count based on viewport
+    function getVisibleCards() {
+      if (window.innerWidth >= 1024) return 3; // lg
+      if (window.innerWidth >= 768) return 2; // md
+      return 1; // mobile
+    }
+
+    // Calculate max index based on visible cards
+    function getMaxIndex() {
+      const visibleCards = getVisibleCards();
+      return Math.max(0, totalCards - visibleCards);
+    }
+
+    // Generate dots based on current viewport
+    function generateDots() {
+      const maxIndex = getMaxIndex();
+      dotsContainer.innerHTML = "";
+
+      for (let i = 0; i <= maxIndex; i++) {
+        const dot = document.createElement("button");
+        dot.className = `carousel-dot w-2 h-2 rounded-full transition-all ${i === currentIndex ? "bg-accent w-6" : "bg-neutral-300 hover:bg-neutral-400"}`;
+        dot.dataset.index = i;
+        dot.setAttribute("aria-label", `Ir a posición ${i + 1}`);
+        dot.addEventListener("click", function () {
+          currentIndex = parseInt(this.dataset.index);
+          updateCarousel();
+        });
+        dotsContainer.appendChild(dot);
+      }
+    }
+
+    // Update carousel position
+    function updateCarousel() {
+      const gap = 24; // gap-6 = 24px
+      const cardWidth = cards[0].offsetWidth;
+      const offset = currentIndex * (cardWidth + gap);
+
+      carousel.style.transform = `translateX(-${offset}px)`;
+
+      // Update dots
+      const dots = dotsContainer.querySelectorAll(".carousel-dot");
+      dots.forEach((dot, index) => {
+        dot.classList.toggle("bg-accent", index === currentIndex);
+        dot.classList.toggle("bg-neutral-300", index !== currentIndex);
+        dot.classList.toggle("w-6", index === currentIndex);
+        dot.classList.toggle("w-2", index !== currentIndex);
+      });
+
+      // Update button states
+      prevBtn.classList.toggle("opacity-50", currentIndex === 0);
+      prevBtn.classList.toggle("pointer-events-none", currentIndex === 0);
+      nextBtn.classList.toggle("opacity-50", currentIndex >= getMaxIndex());
+      nextBtn.classList.toggle(
+        "pointer-events-none",
+        currentIndex >= getMaxIndex(),
+      );
+
+      console.log("[Carousel] Updated to index:", currentIndex);
+    }
+
+    // Navigation handlers
+    prevBtn.addEventListener("click", function () {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateCarousel();
+      }
+    });
+
+    nextBtn.addEventListener("click", function () {
+      if (currentIndex < getMaxIndex()) {
+        currentIndex++;
+        updateCarousel();
+      }
+    });
+
+    // Handle resize
+    let resizeTimeout;
+    window.addEventListener("resize", function () {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(function () {
+        // Ensure currentIndex is valid after resize
+        if (currentIndex > getMaxIndex()) {
+          currentIndex = getMaxIndex();
+        }
+        generateDots();
+        updateCarousel();
+      }, 150);
+    });
+
+    // Touch/swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    carousel.addEventListener(
+      "touchstart",
+      function (e) {
+        touchStartX = e.changedTouches[0].screenX;
+      },
+      { passive: true },
+    );
+
+    carousel.addEventListener(
+      "touchend",
+      function (e) {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      },
+      { passive: true },
+    );
+
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      const diff = touchStartX - touchEndX;
+
+      if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0 && currentIndex < getMaxIndex()) {
+          // Swipe left - next
+          currentIndex++;
+          updateCarousel();
+        } else if (diff < 0 && currentIndex > 0) {
+          // Swipe right - prev
+          currentIndex--;
+          updateCarousel();
+        }
+      }
+    }
+
+    // Auto-play (optional - pauses on hover)
+    let autoPlayInterval;
+    const autoPlayDelay = 5000;
+
+    function startAutoPlay() {
+      autoPlayInterval = setInterval(function () {
+        if (currentIndex < getMaxIndex()) {
+          currentIndex++;
+        } else {
+          currentIndex = 0;
+        }
+        updateCarousel();
+      }, autoPlayDelay);
+    }
+
+    function stopAutoPlay() {
+      clearInterval(autoPlayInterval);
+    }
+
+    // Pause on hover
+    carousel.addEventListener("mouseenter", stopAutoPlay);
+    carousel.addEventListener("mouseleave", startAutoPlay);
+
+    // Initialize
+    generateDots();
+    updateCarousel();
+    startAutoPlay();
+
+    console.log(
+      "[Carousel] Clinical cases carousel initialized with",
+      totalCards,
+      "cards",
+    );
+  } else {
+    console.log(
+      "[Carousel] Carousel elements not found, skipping initialization",
+    );
+  }
+
   console.log("[App] Application initialized successfully");
 })();
