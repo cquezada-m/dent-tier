@@ -236,6 +236,98 @@
   // WhatsApp number (replace with actual clinic number)
   const WHATSAPP_NUMBER = "56912345678";
 
+  // ==================== SERVICE CONFIGURATION ====================
+  // Set active service: "aesthetic" (smile design) or "implants" (implants/rehabilitation)
+  // Can be overridden by setting window.SERVICE_TYPE before loading this script
+  const ACTIVE_SERVICE = window.SERVICE_TYPE || "implants";
+  console.log("[Config] Active service:", ACTIVE_SERVICE);
+
+  // Service-specific configurations
+  const SERVICE_CONFIG = {
+    aesthetic: {
+      name: "Diseño de Sonrisa Digital Personalizada",
+      tierCalculator: "calculateTier",
+      resultMessage:
+        "Eres candidato(a) para la evaluación. Continúa por WhatsApp.",
+    },
+    implants: {
+      name: "Implantes y Rehabilitación Oral",
+      tierCalculator: "calculateTierImplants",
+      resultMessage:
+        "Tu caso parece candidato(a) para evaluación funcional. En WhatsApp coordinamos la evaluación y resolvemos dudas de etapas/tiempos.",
+    },
+  };
+
+  // Get human-readable labels for form values (non-PII summary)
+  function getGoalLabel(value) {
+    const labels = {
+      // Implants goals
+      piezas_faltantes: "Recuperar función (piezas faltantes)",
+      inestabilidad: "Inestabilidad al masticar",
+      protesis: "Mejorar prótesis actual",
+      evaluacion_implantes: "Evaluación candidatura implantes",
+      // Aesthetic goals (legacy)
+      armonica: "Sonrisa armónica",
+      confianza: "Mejorar confianza",
+      corregir: "Corregir detalles",
+      no_seguro: "Por definir",
+    };
+    return labels[value] || value;
+  }
+
+  function getTimelineLabel(value) {
+    const labels = {
+      "7-14": "7-14 días",
+      este_mes: "Este mes",
+      "60_dias": "60+ días",
+      no_seguro: "Explorando",
+    };
+    return labels[value] || value;
+  }
+
+  function getInvestmentLabel(value) {
+    const labels = {
+      "3000_6000": "$3k-$6k USD",
+      "6000_12000": "$6k-$12k USD",
+      "12000_plus": "$12k+ USD",
+      undisclosed: "Por definir",
+      // Legacy
+      "1500_3000": "$1.5k-$3k USD",
+      "6000_plus": "$6k+ USD",
+    };
+    return labels[value] || value;
+  }
+
+  // Build WhatsApp message based on service type
+  function buildWhatsAppMessage(
+    firstName,
+    shortId,
+    goal,
+    timeline,
+    investment,
+    serviceType,
+  ) {
+    const service = serviceType || ACTIVE_SERVICE;
+    const serviceName = SERVICE_CONFIG[service].name;
+    const goalLabel = getGoalLabel(goal);
+    const timelineLabel = getTimelineLabel(timeline);
+    const investmentLabel = getInvestmentLabel(investment);
+
+    if (service === "implants") {
+      return (
+        `Hola, soy ${firstName}. Postulé a evaluación de ${serviceName}.\n\n` +
+        `📋 Resumen:\n` +
+        `• Objetivo: ${goalLabel}\n` +
+        `• Plazo: ${timelineLabel}\n` +
+        `• Inversión estimada: ${investmentLabel}\n\n` +
+        `ID: ${shortId}\n\n` +
+        `¿Tienen horas disponibles esta semana?`
+      );
+    } else {
+      return `Hola, soy ${firstName}. Postulé a la evaluación de ${serviceName}. ¿Me ayudan a agendar? ID: ${shortId}`;
+    }
+  }
+
   // Restore form data
   function restoreFormData() {
     console.log("[Form] Restoring form data...");
@@ -410,9 +502,9 @@
     return true;
   }
 
-  // Calculate lead tier
+  // Calculate lead tier (original - for aesthetic/smile design services)
   function calculateTier() {
-    console.log("[Form] Calculating lead tier...");
+    console.log("[Form] Calculating lead tier (original method)...");
     const priority = formData.priority;
     const timeline = formData.timeline;
     const investment = formData.investment_range;
@@ -466,16 +558,117 @@
     return "C";
   }
 
+  // Calculate lead tier for Implants/Oral Rehabilitation services
+  // Thresholds adjusted for higher-value treatments
+  function calculateTierImplants() {
+    console.log("[Form] Calculating lead tier (implants/rehab method)...");
+    const priority = formData.priority;
+    const timeline = formData.timeline;
+    const investment = formData.investment_range;
+    const accepted = formData.accepted_conditions;
+
+    console.log("[Form] Implants tier calculation inputs:", {
+      priority,
+      timeline,
+      investment,
+      accepted,
+    });
+
+    // Tier C: Not accepted conditions or exploring without commitment
+    if (!accepted) {
+      console.log("[Form] Implants Tier result: C (conditions not accepted)");
+      return "C";
+    }
+
+    if (priority === "explorando") {
+      console.log("[Form] Implants Tier result: C (exploring only)");
+      return "C";
+    }
+
+    // Define intent levels
+    // High intent: priority alta + timeline <= 30 days (7-14 or este_mes)
+    const isHighIntent =
+      priority === "alta" && (timeline === "7-14" || timeline === "este_mes");
+
+    // Medium intent: priority alta with longer timeline, or priority media with any timeline except exploring
+    const isMediumIntent =
+      (priority === "alta" &&
+        (timeline === "60_dias" || timeline === "no_seguro")) ||
+      (priority === "media" && timeline !== "no_seguro");
+
+    // Define budget levels for implants/rehabilitation
+    // High budget: >= $6,000 USD (6000_12000 or 12000_plus)
+    const isHighBudget =
+      investment === "6000_12000" || investment === "12000_plus";
+
+    // Medium budget: $3,000 - $6,000 USD
+    const isMediumBudget = investment === "3000_6000";
+
+    // Tier A: High intent + High budget (serious implant/rehab candidate)
+    // Priority alta + timeline <= 30 days + investment >= $6,000
+    if (isHighIntent && isHighBudget) {
+      console.log(
+        "[Form] Implants Tier result: A (high intent + high budget - serious candidate)",
+      );
+      return "A";
+    }
+
+    // Tier B1: High intent + Medium budget (hot lead, budget may need financing)
+    if (isHighIntent && isMediumBudget) {
+      console.log(
+        "[Form] Implants Tier result: B1 (high intent + medium budget)",
+      );
+      return "B1";
+    }
+
+    // Tier B2: Medium intent + High budget (warm lead, good budget, needs nurturing)
+    if (isMediumIntent && isHighBudget) {
+      console.log(
+        "[Form] Implants Tier result: B2 (medium intent + high budget)",
+      );
+      return "B2";
+    }
+
+    // Tier B3: Medium intent + Medium budget (warm lead, may need staged treatment)
+    if (isMediumIntent && isMediumBudget) {
+      console.log(
+        "[Form] Implants Tier result: B3 (medium intent + medium budget)",
+      );
+      return "B3";
+    }
+
+    // Tier C: Low intent, undisclosed budget, or doesn't meet criteria
+    console.log(
+      "[Form] Implants Tier result: C (low intent or insufficient budget)",
+    );
+    return "C";
+  }
+
   // Handle form submission
-  function handleSubmit() {
+  // serviceType: "aesthetic" | "implants" - defaults to ACTIVE_SERVICE if not provided
+  function handleSubmit(serviceType) {
+    const service = serviceType || ACTIVE_SERVICE;
     console.log("[Form] Processing form submission...");
+    console.log("[Form] Service type:", service);
     saveFormData();
 
-    const tier = calculateTier();
+    // Calculate tier based on service type
+    let tier;
+    if (service === "implants") {
+      tier = calculateTierImplants();
+    } else {
+      tier = calculateTier();
+    }
+
     const isQualified = ["A", "B1", "B2", "B3"].includes(tier);
     const shortId = generateShortId();
 
-    console.log("[Form] Submission result:", { tier, isQualified, shortId });
+    console.log("[Form] Submission result:", {
+      tier,
+      isQualified,
+      shortId,
+      service,
+    });
 
     // Fire form_submit event
     pushEvent("form_submit", {
@@ -507,14 +700,31 @@
     if (isQualified) {
       resultQualified.classList.remove("hidden");
       resultName.textContent = formData.first_name;
+
+      // Update result message based on service
+      const resultMessageEl =
+        resultQualified.querySelector("p.text-neutral-600");
+      if (resultMessageEl) {
+        resultMessageEl.textContent = SERVICE_CONFIG[service].resultMessage;
+      }
+
       console.log(
         "[Form] Displaying qualified result for:",
         formData.first_name,
+        "- Service:",
+        service,
       );
 
-      // Build WhatsApp message
+      // Build WhatsApp message with full context
       const message = encodeURIComponent(
-        `Hola, soy ${formData.first_name}. Postulé a la evaluación de Diseño de Sonrisa Digital Personalizada. ¿Me ayudan a agendar? ID: ${shortId}`,
+        buildWhatsAppMessage(
+          formData.first_name,
+          shortId,
+          formData.primary_goal,
+          formData.timeline,
+          formData.investment_range,
+          service,
+        ),
       );
       whatsappLink.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
       console.log("[Form] WhatsApp link generated with ID:", shortId);
@@ -523,10 +733,18 @@
       whatsappLink.addEventListener("click", function () {
         pushEvent("whatsapp_redirect", {
           lead_tier: tier,
+          service: service,
           lead_id_short: shortId,
           is_qualified: true,
         });
-        console.log("[Form] WhatsApp redirect clicked, ID:", shortId);
+        console.log(
+          "[Form] WhatsApp redirect clicked, ID:",
+          shortId,
+          "Service:",
+          service,
+          "Tier:",
+          tier,
+        );
       });
     } else {
       resultNotQualified.classList.remove("hidden");
@@ -612,7 +830,8 @@
     e.preventDefault();
     if (!validateStep()) return;
     formSubmitted = true;
-    handleSubmit();
+    // Pass the active service type to handleSubmit
+    handleSubmit(ACTIVE_SERVICE);
   });
 
   form.addEventListener("submit", function (e) {
