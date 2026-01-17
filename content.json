@@ -13,94 +13,18 @@
         "url": "https://static.wixstatic.com/media/916115_066056ed86b64e0ab953955798243208f000.jpg/v1/fill/w_980%2Ch_327%2Cal_c%2Cq_80%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/916115_066056ed86b64e0ab953955798243208f000.jpg"
       }
     ],
-    "service_icons": [
-      {
-        "name": "ODONTOLOGIA-GENERAL.png",
-        "url": "https://static.wixstatic.com/media/916115_12befbb6804649d3a82c22d0ac8a90be~mv2.png/v1/fill/w_121%2Ch_121%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/ODONTOLOGIA-GENERAL.png"
-      },
-      {
-        "name": "ENDODONCIA.png",
-        "url": "https://static.wixstatic.com/media/916115_9936c83dbf2d43a68e0023e8886c1f75~mv2.png/v1/fill/w_121%2Ch_121%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/ENDODONCIA.png"
-      },
-      {
-        "name": "REHABILITACION-ORAL.png",
-        "url": "https://static.wixstatic.com/media/916115_af096cc95fd844b6b3edef60a9d41414~mv2.png/v1/fill/w_121%2Ch_121%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/REHABILITACION-ORAL.png"
-      },
-      {
-        "name": "PERIODONCIA.png",
-        "url": "https://static.wixstatic.com/media/916115_7bb3aeb0fd0b4c3d99cda7d177eeb18b~mv2.png/v1/crop/x_41%2Cy_41%2Cw_924%2Ch_924/fill/w_121%2Ch_121%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/PERIODONCIA.png"
-      },
-      {
-        "name": "ESTICA-DENTAL.png",
-        "url": "https://static.wixstatic.com/media/916115_c0d611f1812a48169ecb8df6f11f5341~mv2.png/v1/crop/x_122%2Cy_122%2Cw_756%2Ch_756/fill/w_121%2Ch_121%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/ESTICA-DENTAL.png"
-      },
-      {
-        "name": "CIRUGIA-MAXILOFACIAL.png",
-        "url": "https://static.wixstatic.com/media/916115_5d7fbcb5dd59438cb4b785a5094f72c0~mv2.png/v1/fill/w_121%2Ch_121%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/CIRUGIA-MAXILOFACIAL.png"
-      },
-      {
-        "name": "ORTODONCIA.png",
-        "url": "https://static.wixstatic.com/media/916115_dfd8bcdb77b6451ab81460d36ce517f0~mv2.png/v1/fill/w_121%2Ch_121%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/ORTODONCIA.png"
-      },
-      {
-        "name": "ESTETICA-FACIAL.png",
-        "url": "https://static.wixstatic.com/media/916115_6eccc43fe2bb4bcfbaf53275ee44432b~mv2.png/v1/fill/w_121%2Ch_121%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/ESTETICA-FACIAL.png"
-      }
-    ],
-    "section_graphics": [
-      {
-        "name": "que nos diferencia.png",
-        "url": "https://static.wixstatic.com/media/916115_e931f1f0e7fd416d8c652977964e2ee8~mv2.png/v1/fill/w_1896%2Ch_190%2Cal_c%2Cq_90%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/que%20nos%20diferencia.png"
-      }
-    ],
-    "differentiator_icons": [
-      {
-        "name": "20añosexperiencia.png",
-        "url": "https://static.wixstatic.com/media/916115_4e7135c3fb0a452582693854c11a7ce5~mv2.png/v1/fill/w_199%2Ch_199%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/20a%C3%B1osexperiencia.png"
-      },
-      {
-        "name": "atencionexclusiva.png",
-        "url": "https://static.wixstatic.com/media/916115_fab12b1d8094484e95be3c8137741484~mv2.png/v1/fill/w_199%2Ch_199%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/atencionexclusiva.png"
-      },
-      {
-        "name": "ambientefamiliar.png",
-        "url": "https://static.wixstatic.com/media/916115_882fe70a8a1746c48c783621202ce233~mv2.png/v1/fill/w_199%2Ch_199%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/ambientefamiliar.png"
-      },
-      {
-        "name": "certificación.png",
-        "url": "https://static.wixstatic.com/media/916115_b41188575bf44629ad6c3b579c836376~mv2.png/v1/fill/w_199%2Ch_199%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/certificaci%C3%B3n.png"
-      }
-    ],
     "photos": [
       {
-        "name": "clinica-photo-1.png",
+        "name": "cad-cam.png",
         "url": "https://static.wixstatic.com/media/916115_3aecd22f5a9f4e10ae4f6306b49a443b~mv2.png/v1/fill/w_491%2Ch_491%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/916115_3aecd22f5a9f4e10ae4f6306b49a443b~mv2.png"
       },
       {
-        "name": "clinica-photo-2.png",
+        "name": "doctora.png",
         "url": "https://static.wixstatic.com/media/916115_f2a8ce8f95ae454297ae45a3b695ed5e~mv2.png/v1/fill/w_429%2Ch_429%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/916115_f2a8ce8f95ae454297ae45a3b695ed5e~mv2.png"
       },
       {
-        "name": "confirmacion-2.png",
+        "name": "clinica.png",
         "url": "https://static.wixstatic.com/media/916115_8f4c3b0ab9ac4a51ad2613c68a382a0d~mv2.png/v1/fill/w_980%2Ch_980%2Cal_c%2Cq_90%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/916115_8f4c3b0ab9ac4a51ad2613c68a382a0d~mv2.png"
-      }
-    ],
-    "clinical_cases": [
-      {
-        "name": "carillas-de-porcelana.png",
-        "url": "https://static.wixstatic.com/media/916115_e23f115a14fa40f9bc2c371c6aa78390~mv2.png/v1/fill/w_250%2Ch_135%2Cal_c%2Cq_95%2Cenc_auto/916115_e23f115a14fa40f9bc2c371c6aa78390~mv2.png"
-      },
-      {
-        "name": "blanqueamiento.png",
-        "url": "https://static.wixstatic.com/media/916115_065019e594a84a75be5136b1ab6fa58c~mv2.png/v1/fill/w_250%2Ch_135%2Cal_c%2Cq_95%2Cenc_auto/916115_065019e594a84a75be5136b1ab6fa58c~mv2.png"
-      },
-      {
-        "name": "resinas.png",
-        "url": "https://static.wixstatic.com/media/916115_a1fd0fe83296478a88021080f2e48904~mv2.png/v1/fill/w_250%2Ch_135%2Cal_c%2Cq_95%2Cenc_auto/916115_a1fd0fe83296478a88021080f2e48904~mv2.png"
-      },
-      {
-        "name": "coronas-y-carillas.png",
-        "url": "https://static.wixstatic.com/media/916115_96944a091d854d44854b988ef2fd9948~mv2.png/v1/fill/w_250%2Ch_135%2Cal_c%2Cq_95%2Cenc_auto/916115_96944a091d854d44854b988ef2fd9948~mv2.png"
       }
     ],
     "social_icons": [
