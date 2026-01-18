@@ -298,28 +298,44 @@
     return labels[value] || value;
   }
 
+  function getInPersonLabel(value) {
+    const labels = {
+      yes: "Sí",
+      maybe: "Depende",
+      no: "No",
+    };
+    return labels[value] || value;
+  }
+
   // Build WhatsApp message based on service type
   function buildWhatsAppMessage(
     firstName,
     shortId,
     goal,
     timeline,
+    priority,
+    inPerson,
     investment,
     serviceType,
+    tier,
   ) {
     const service = serviceType || ACTIVE_SERVICE;
     const serviceName = SERVICE_CONFIG[service].name;
     const goalLabel = getGoalLabel(goal);
     const timelineLabel = getTimelineLabel(timeline);
+    const inPersonLabel = getInPersonLabel(inPerson);
     const investmentLabel = getInvestmentLabel(investment);
 
     if (service === "implants") {
+      const tierLine = tier ? `• Tier: ${tier}\n` : "";
       return (
         `Hola, soy ${firstName}. Postulé a evaluación de ${serviceName}.\n\n` +
         `📋 Resumen:\n` +
         `• Objetivo: ${goalLabel}\n` +
         `• Plazo: ${timelineLabel}\n` +
+        `• Evaluación presencial: ${inPersonLabel}\n` +
         `• Inversión estimada: ${investmentLabel}\n\n` +
+        tierLine +
         `ID: ${shortId}\n\n` +
         `¿Tienen horas disponibles esta semana?`
       );
@@ -337,7 +353,7 @@
       console.log("[Form] Restored first_name:", formData.first_name);
     }
 
-    ["primary_goal", "timeline", "priority", "investment_range"].forEach(
+    ["primary_goal", "timeline", "priority", "in_person", "investment_range"].forEach(
       (field) => {
         if (formData[field]) {
           const radio = document.querySelector(
@@ -375,7 +391,7 @@
   function saveFormData() {
     formData.first_name = document.getElementById("first_name").value;
 
-    ["primary_goal", "timeline", "priority", "investment_range"].forEach(
+    ["primary_goal", "timeline", "priority", "in_person", "investment_range"].forEach(
       (field) => {
         const checked = document.querySelector(
           `input[name="${field}"]:checked`,
@@ -428,12 +444,12 @@
       // Fire form_step event
       const stepNames = [
         "",
-        "first_name",
         "primary_goal",
         "timeline",
         "priority",
+        "in_person",
         "investment_range",
-        "consent",
+        "consent_and_identity",
       ];
       const stepName = stepNames[currentStep] || "unknown";
       pushEvent("form_step", {
@@ -453,28 +469,13 @@
     const step = parseInt(activeStep.dataset.step);
     console.log("[Form] Validating step:", step);
 
-    if (step === 1) {
-      const name = document.getElementById("first_name").value.trim();
-      if (!name) {
-        console.warn("[Form] Validation failed: first_name is empty");
-        pushEvent("form_validation_error", {
-          step: step,
-          field: "first_name",
-          reason: "empty",
-        });
-        document.getElementById("first_name").focus();
-        return false;
-      }
-      console.log("[Form] Step 1 validation passed");
-    }
-
-    if (step >= 2 && step <= 5) {
+    if (step >= 1 && step <= 5) {
       const fieldNames = [
-        "",
         "",
         "primary_goal",
         "timeline",
         "priority",
+        "in_person",
         "investment_range",
       ];
       const fieldName = fieldNames[step];
@@ -497,6 +498,42 @@
         fieldName + ":",
         checked.value,
       );
+    }
+
+    if (step === 6) {
+      const acceptedCheckbox = document.querySelector(
+        'input[name="accepted_conditions"]',
+      );
+      const acceptedErrorEl = document.getElementById(
+        "accepted-conditions-error",
+      );
+
+      if (acceptedErrorEl) acceptedErrorEl.classList.add("hidden");
+
+      if (!acceptedCheckbox || !acceptedCheckbox.checked) {
+        console.warn("[Form] Validation failed: accepted_conditions not checked");
+        pushEvent("form_validation_error", {
+          step: step,
+          field: "accepted_conditions",
+          reason: "not_checked",
+        });
+        if (acceptedErrorEl) acceptedErrorEl.classList.remove("hidden");
+        if (acceptedCheckbox) acceptedCheckbox.focus();
+        return false;
+      }
+
+      const name = document.getElementById("first_name").value.trim();
+      if (!name) {
+        console.warn("[Form] Validation failed: first_name is empty");
+        pushEvent("form_validation_error", {
+          step: step,
+          field: "first_name",
+          reason: "empty",
+        });
+        document.getElementById("first_name").focus();
+        return false;
+      }
+      console.log("[Form] Step 6 validation passed");
     }
 
     return true;
@@ -566,11 +603,13 @@
     const timeline = formData.timeline;
     const investment = formData.investment_range;
     const accepted = formData.accepted_conditions;
+    const inPerson = formData.in_person;
 
     console.log("[Form] Implants tier calculation inputs:", {
       priority,
       timeline,
       investment,
+      in_person: inPerson,
       accepted,
     });
 
@@ -582,6 +621,11 @@
 
     if (priority === "explorando") {
       console.log("[Form] Implants Tier result: C (exploring only)");
+      return "C";
+    }
+
+    if (inPerson === "no") {
+      console.log("[Form] Implants Tier result: C (in-person not feasible)");
       return "C";
     }
 
@@ -604,44 +648,37 @@
     // Medium budget: $3,000 - $6,000 USD
     const isMediumBudget = investment === "3000_6000";
 
-    // Tier A: High intent + High budget (serious implant/rehab candidate)
-    // Priority alta + timeline <= 30 days + investment >= $6,000
+    // Base tier before in-person downgrade rules
+    let tier = "C";
+
     if (isHighIntent && isHighBudget) {
-      console.log(
-        "[Form] Implants Tier result: A (high intent + high budget - serious candidate)",
-      );
-      return "A";
+      tier = "A";
+    } else if (isHighIntent && isMediumBudget) {
+      tier = "B1";
+    } else if (isMediumIntent && isHighBudget) {
+      tier = "B2";
+    } else if (isMediumIntent && isMediumBudget) {
+      tier = "B3";
     }
 
-    // Tier B1: High intent + Medium budget (hot lead, budget may need financing)
-    if (isHighIntent && isMediumBudget) {
-      console.log(
-        "[Form] Implants Tier result: B1 (high intent + medium budget)",
-      );
-      return "B1";
+    // While in_person == maybe, downgrade one level (default enabled)
+    if (inPerson === "maybe") {
+      const downgradeMap = {
+        A: "B2",
+        B1: "B3",
+        B2: "B3",
+        B3: "C",
+      };
+      tier = downgradeMap[tier] || tier;
     }
 
-    // Tier B2: Medium intent + High budget (warm lead, good budget, needs nurturing)
-    if (isMediumIntent && isHighBudget) {
-      console.log(
-        "[Form] Implants Tier result: B2 (medium intent + high budget)",
-      );
-      return "B2";
+    // If budget undisclosed and tier is not C, downgrade to B3
+    if (investment === "undisclosed" && tier !== "C") {
+      tier = "B3";
     }
 
-    // Tier B3: Medium intent + Medium budget (warm lead, may need staged treatment)
-    if (isMediumIntent && isMediumBudget) {
-      console.log(
-        "[Form] Implants Tier result: B3 (medium intent + medium budget)",
-      );
-      return "B3";
-    }
-
-    // Tier C: Low intent, undisclosed budget, or doesn't meet criteria
-    console.log(
-      "[Form] Implants Tier result: C (low intent or insufficient budget)",
-    );
-    return "C";
+    console.log("[Form] Implants Tier result:", tier);
+    return tier;
   }
 
   // Handle form submission
@@ -677,6 +714,10 @@
       investment_range: formData.investment_range,
       priority: formData.priority,
       timeline: formData.timeline,
+      in_person: formData.in_person || null,
+      primary_goal: formData.primary_goal || null,
+      accepted_conditions: Boolean(formData.accepted_conditions),
+      whatsapp_opt_in: Boolean(formData.whatsapp_opt_in),
     });
     console.log("[Form] form_submit event fired");
 
@@ -688,6 +729,10 @@
         investment_range: formData.investment_range,
         priority: formData.priority,
         timeline: formData.timeline,
+        in_person: formData.in_person || null,
+        primary_goal: formData.primary_goal || null,
+        accepted_conditions: Boolean(formData.accepted_conditions),
+        whatsapp_opt_in: Boolean(formData.whatsapp_opt_in),
       });
       console.log("[Form] qualified_lead event fired for tier:", tier);
     }
@@ -722,8 +767,11 @@
           shortId,
           formData.primary_goal,
           formData.timeline,
+          formData.priority,
+          formData.in_person,
           formData.investment_range,
           service,
+          tier,
         ),
       );
       whatsappLink.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
@@ -736,6 +784,10 @@
           service: service,
           lead_id_short: shortId,
           is_qualified: true,
+          in_person: formData.in_person || null,
+          primary_goal: formData.primary_goal || null,
+          accepted_conditions: Boolean(formData.accepted_conditions),
+          whatsapp_opt_in: Boolean(formData.whatsapp_opt_in),
         });
         console.log(
           "[Form] WhatsApp redirect clicked, ID:",
@@ -760,6 +812,7 @@
       primary_goal: formData.primary_goal,
       timeline: formData.timeline,
       priority: formData.priority,
+      in_person: formData.in_person || null,
       investment_range: formData.investment_range,
       session_id: sessionId,
       lead_id: leadId,
@@ -853,6 +906,7 @@
         timeline: formData.timeline || null,
         priority: formData.priority || null,
         investment_range: formData.investment_range || null,
+        in_person: formData.in_person || null,
       });
       console.log("[Form] form_abandon event fired at step:", currentStep);
     }
